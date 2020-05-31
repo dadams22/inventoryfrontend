@@ -4,6 +4,7 @@ import Login from './scenes/Login';
 import Dashboard from "./scenes/Dashboard";
 import './App.css';
 import { Layout } from "antd";
+import NavigationBar from "./components/NavigationBar";
 
 const { Content } = Layout;
 
@@ -11,6 +12,7 @@ function App() {
     return (
       <Router>
           <Layout>
+              <NavigationBar/>
               <Content>
                   <Switch>
                       <Route exact path="/login" component={Login}/>
