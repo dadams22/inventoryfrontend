@@ -5,6 +5,8 @@ import Dashboard from "./scenes/Dashboard";
 import './App.css';
 import { Layout } from "antd";
 import NavigationBar from "./components/NavigationBar";
+import Inventory from "./scenes/Inventory";
+import Scales from "./scenes/Scales";
 
 const { Content } = Layout;
 
@@ -17,6 +19,8 @@ function App() {
                   <Switch>
                       <Route exact path="/login" component={Login}/>
                       <Route exact path="/dashboard" component={Dashboard}/>
+                      <Route path={'/inventory'} component={Inventory}/>
+                      <Route path={'/scales'} component={Scales}/>
                   </Switch>
               </Content>
           </Layout>
