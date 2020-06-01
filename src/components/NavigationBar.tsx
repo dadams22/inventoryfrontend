@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from "antd";
+import { Button, Menu } from "antd";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 
 const NavigationBar = ({
@@ -21,6 +21,7 @@ const NavigationBar = ({
                     <Link to={tab.path}>{tab.name}</Link>
                 </Menu.Item>
             ))}
+            <Button danger shape={'round'}>Sign Out</Button>
         </Menu>
     )
 };
