@@ -1,4 +1,8 @@
-import { createStore } from "redux";
+import {applyMiddleware, createStore} from "redux";
 import { applicationReducer } from "./services/reducer";
+import { logger } from 'redux-logger';
 
-export const store = createStore(applicationReducer);
+export const store = createStore(
+    applicationReducer,
+    applyMiddleware(logger),
+);
