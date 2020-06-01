@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './scenes/Login';
-import Dashboard from "./scenes/Dashboard";
 import './App.css';
 import { Layout } from "antd";
 import NavigationBar from "./components/NavigationBar";
@@ -17,8 +16,7 @@ function App() {
               <NavigationBar/>
               <Content>
                   <Switch>
-                      <Route exact path="/login" component={Login}/>
-                      <Route exact path="/dashboard" component={Dashboard}/>
+                      <Route exact path={'/login'} component={Login}/>
                       <Route path={'/inventory'} component={Inventory}/>
                       <Route path={'/scales'} component={Scales}/>
                   </Switch>
