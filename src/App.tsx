@@ -11,18 +11,18 @@ const { Content } = Layout;
 
 function App() {
     return (
-      <Router>
-          <Layout>
-              <NavigationBar/>
-              <Content>
-                  <Switch>
-                      <Route exact path={'/login'} component={Login}/>
-                      <Route path={'/inventory'} component={Inventory}/>
-                      <Route path={'/scales'} component={Scales}/>
-                  </Switch>
-              </Content>
-          </Layout>
-      </Router>
+        <Router>
+            <Layout>
+                <NavigationBar/>
+                <Content>
+                    <Switch>
+                        <Route exact path={'/login'} component={Login}/>
+                        <Route path={'/inventory'} component={Inventory}/>
+                        <Route path={'/scales'} component={Scales}/>
+                    </Switch>
+                </Content>
+            </Layout>
+        </Router>
     );
 }
 
