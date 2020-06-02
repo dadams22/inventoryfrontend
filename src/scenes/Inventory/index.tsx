@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {ApplicationState, InventoryItem} from "../../services/types";
 import {useSelector} from "react-redux";
-import {Button, Col, Input, Row, Table} from "antd";
+import {Button, Col, Row, Table} from "antd";
 import {Link} from "react-router-dom";
-import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
+import {PlusOutlined} from '@ant-design/icons';
+import SearchBar from "../../components/SearchBar";
 
 function Inventory() {
     const items = useSelector((state: ApplicationState) => state.items);
@@ -33,11 +34,10 @@ function Inventory() {
         <>
             <Row>
                 <Col span={4} offset={3}>
-                    <Input
-                        value={searchValue}
-                        onChange={e => setSearchValue(e.target.value)}
+                    <SearchBar
+                        searchValue={searchValue}
+                        onChange={setSearchValue}
                         placeholder={'Search items by name...'}
-                        prefix={<SearchOutlined/>}
                     />
                 </Col>
                 <Col span={3} offset={11}>
