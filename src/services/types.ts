@@ -6,6 +6,5 @@ export interface ApplicationState {
 export interface InventoryItem {
     id: number;
     name: string;
-    description: string;
     weight: number;
 }
