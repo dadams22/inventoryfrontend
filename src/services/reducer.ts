@@ -18,6 +18,16 @@ const initialState: ApplicationState = {
             id: 3,
             name: 'Rice',
             weight: 60.8,
+        },
+        {
+            id: 4,
+            name: 'Tortillas',
+            weight: 7.5,
+        },
+        {
+            id: 5,
+            name: 'Peppers',
+            weight: 18,
         }
     ],
 };
