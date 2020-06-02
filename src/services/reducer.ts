@@ -30,6 +30,28 @@ const initialState: ApplicationState = {
             weight: 18,
         }
     ],
+    scales: [
+        {
+            id: 1001,
+            inUse: true,
+        },
+        {
+            id: 1562,
+            inUse: false,
+        },
+        {
+            id: 6437,
+            inUse: true,
+        },
+        {
+            id: 7912,
+            inUse: true,
+        },
+        {
+            id: 3007,
+            inUse: false,
+        }
+    ],
 };
 
 export function applicationReducer(
