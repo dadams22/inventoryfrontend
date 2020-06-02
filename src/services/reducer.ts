@@ -1,5 +1,5 @@
 import { ApplicationState } from "./types";
-import {ApplicationAction} from "./actions";
+import { ApplicationAction } from "./actions";
 
 
 const initialState: ApplicationState = {
