@@ -1,8 +1,9 @@
 import React from 'react';
 import {ApplicationState, InventoryItem} from "../../services/types";
 import {useSelector} from "react-redux";
-import {Col, Row, Table} from "antd";
+import {Col, Input, Row, Table} from "antd";
 import {Link} from "react-router-dom";
+import {SearchOutlined} from '@ant-design/icons';
 
 function Inventory() {
     const items = useSelector((state: ApplicationState) => state.items);
@@ -25,11 +26,18 @@ function Inventory() {
     ];
 
     return (
-        <Row justify={'center'}>
-            <Col span={18}>
-                <Table dataSource={dataSource} columns={columns} />
-            </Col>
-        </Row>
+        <>
+            <Row>
+                <Col span={4} offset={3}>
+                    <Input prefix={<SearchOutlined/>}/>
+                </Col>
+            </Row>
+            <Row justify={'center'}>
+                <Col span={18}>
+                    <Table dataSource={dataSource} columns={columns} />
+                </Col>
+            </Row>
+        </>
     );
 }
 
