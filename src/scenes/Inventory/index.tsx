@@ -14,7 +14,12 @@ function Inventory() {
             key: 'name',
             sorter: (a: InventoryItem, b: InventoryItem) => a.name.localeCompare(b.name)
         },
-        { title: 'Weight', dataIndex: 'weight', key: 'weight', },
+        {
+            title: 'Weight',
+            dataIndex: 'weight',
+            key: 'weight',
+            sorter: (a: InventoryItem, b: InventoryItem) => a.weight - b.weight
+        },
     ];
 
     return (
