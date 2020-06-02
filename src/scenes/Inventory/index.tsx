@@ -2,6 +2,7 @@ import React from 'react';
 import {ApplicationState, InventoryItem} from "../../services/types";
 import {useSelector} from "react-redux";
 import {Col, Row, Table} from "antd";
+import {Link} from "react-router-dom";
 
 function Inventory() {
     const items = useSelector((state: ApplicationState) => state.items);
@@ -12,7 +13,8 @@ function Inventory() {
             title: 'Name',
             dataIndex:'name',
             key: 'name',
-            sorter: (a: InventoryItem, b: InventoryItem) => a.name.localeCompare(b.name)
+            sorter: (a: InventoryItem, b: InventoryItem) => a.name.localeCompare(b.name),
+            render: (name: string, record: InventoryItem) => <Link to={`/inventory`}>{name}</Link>
         },
         {
             title: 'Weight',
