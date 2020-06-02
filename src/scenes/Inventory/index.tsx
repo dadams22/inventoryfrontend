@@ -1,5 +1,5 @@
 import React from 'react';
-import {ApplicationState} from "../../services/types";
+import {ApplicationState, InventoryItem} from "../../services/types";
 import {useSelector} from "react-redux";
 import {Col, Row, Table} from "antd";
 
@@ -8,7 +8,12 @@ function Inventory() {
 
     const dataSource = items.map(item => ({...item, key: item.id}));
     const columns = [
-        { title: 'Name', dataIndex:'name', key: 'name', },
+        {
+            title: 'Name',
+            dataIndex:'name',
+            key: 'name',
+            sorter: (a: InventoryItem, b: InventoryItem) => a.name.localeCompare(b.name)
+        },
         { title: 'Weight', dataIndex: 'weight', key: 'weight', },
     ];
 
