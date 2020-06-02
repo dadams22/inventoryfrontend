@@ -27,7 +27,7 @@ const initialState: ApplicationState = {
         {
             id: 5,
             name: 'Peppers',
-            weight: 18,
+            weight: 18.1,
         }
     ],
     scales: [

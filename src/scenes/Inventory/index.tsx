@@ -23,10 +23,10 @@ function Inventory() {
             render: (name: string, record: InventoryItem) => <Link to={`/inventory`}>{name}</Link>
         },
         {
-            title: 'Weight',
+            title: 'Weight (lbs.)',
             dataIndex: 'weight',
             key: 'weight',
-            sorter: (a: InventoryItem, b: InventoryItem) => a.weight - b.weight
+            sorter: (a: InventoryItem, b: InventoryItem) => a.weight - b.weight,
         },
     ];
 
