@@ -3,7 +3,7 @@ import { ApplicationAction } from "./actions";
 
 
 const initialState: ApplicationState = {
-
+    items: [],
 };
 
 export function applicationReducer(
