@@ -40,8 +40,8 @@ function Inventory() {
                         prefix={<SearchOutlined/>}
                     />
                 </Col>
-                <Col offset={10}>
-                    <Button type={'primary'} icon={<PlusOutlined/>}>Add a New Item</Button>
+                <Col span={3} offset={11}>
+                    <Button type={'primary'} icon={<PlusOutlined/>} style={{ float: 'right' }}>Add a New Item</Button>
                 </Col>
             </Row>
             <Row justify={'center'}>
