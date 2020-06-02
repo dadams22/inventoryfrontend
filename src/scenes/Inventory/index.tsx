@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ApplicationState, InventoryItem} from "../../services/types";
 import {useSelector} from "react-redux";
 import {Col, Input, Row, Table} from "antd";
@@ -7,8 +7,12 @@ import {SearchOutlined} from '@ant-design/icons';
 
 function Inventory() {
     const items = useSelector((state: ApplicationState) => state.items);
+    const [searchValue, setSearchValue] = useState('');
 
-    const dataSource = items.map(item => ({...item, key: item.id}));
+    const dataSource = items
+        .filter(item => item.name.toLowerCase().includes(searchValue.toLowerCase()))
+        .map(item => ({...item, key: item.id}));
+
     const columns = [
         {
             title: 'Name',
@@ -29,7 +33,12 @@ function Inventory() {
         <>
             <Row>
                 <Col span={4} offset={3}>
-                    <Input prefix={<SearchOutlined/>}/>
+                    <Input
+                        value={searchValue}
+                        onChange={e => setSearchValue(e.target.value)}
+                        placeholder={'Search items by name...'}
+                        prefix={<SearchOutlined/>}
+                    />
                 </Col>
             </Row>
             <Row justify={'center'}>
