@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {ApplicationState, InventoryItem} from "../../services/types";
 import {useSelector} from "react-redux";
-import {Col, Input, Row, Table} from "antd";
+import {Button, Col, Input, Row, Table} from "antd";
 import {Link} from "react-router-dom";
-import {SearchOutlined} from '@ant-design/icons';
+import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
 
 function Inventory() {
     const items = useSelector((state: ApplicationState) => state.items);
@@ -39,6 +39,9 @@ function Inventory() {
                         placeholder={'Search items by name...'}
                         prefix={<SearchOutlined/>}
                     />
+                </Col>
+                <Col offset={10}>
+                    <Button type={'primary'} icon={<PlusOutlined/>}>Add a New Item</Button>
                 </Col>
             </Row>
             <Row justify={'center'}>
