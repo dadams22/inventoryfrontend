@@ -16,9 +16,9 @@ function App() {
         <NavigationBar />
         <Content>
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route path="/inventory" component={Inventory} />
-            <Route path="/scales" component={Scales} />
+            <Route exact path='/login' component={Login} />
+            <Route path='/inventory' component={Inventory} />
+            <Route path='/scales' component={Scales} />
           </Switch>
         </Content>
       </Layout>
