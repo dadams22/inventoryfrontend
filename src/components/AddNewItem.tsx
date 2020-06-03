@@ -11,11 +11,21 @@ interface AddNewItemProps {
 }
 
 function AddNewItem(props: AddNewItemProps) {
+
+
   const [currentStep, setCurrentStep] = useState(0);
   const [itemName, setItemName] = useState('');
   const [itemDescription, setItemDescription] = useState('');
   const [selectedScales, setSelectedScales] = useState([]);
   const [isLoading, setLoading] = useState(false);
+
+  const initializeState = () => {
+    setLoading(false);
+    setCurrentStep(0);
+    setItemName('');
+    setItemDescription('');
+    setSelectedScales([]);
+  }
 
   const scales = useSelector((state: ApplicationState) => state.scales);
   const scalesDataSource = scales
@@ -49,6 +59,7 @@ function AddNewItem(props: AddNewItemProps) {
     console.log('Failure: ', values);
   }
 
+
   const finishAndPostNewItem = () => {
     // Begin 'loading' and attempt to post to database
     setLoading(true);
@@ -56,7 +67,7 @@ function AddNewItem(props: AddNewItemProps) {
     return new Promise( resolve => setTimeout(resolve, 2000))
       .then(() => {
         // After success, message and close modal
-        setLoading(false);
+        initializeState();
         props.closeModal();
         message.success('Item successfully paired with scale and added to inventory!');
       })
@@ -124,9 +135,22 @@ function AddNewItem(props: AddNewItemProps) {
 
   const thirdStep = (
     <>
-      <p>{itemName}</p>
-      <p>{itemDescription}</p>
-      <p>{selectedScales}</p>
+      <h3>Item name</h3>
+      <ul>
+        <li>{itemName}</li>
+      </ul>
+
+      <h3>Item description</h3>
+      <ul>
+        <li>{itemDescription}</li>
+      </ul>
+
+      <h3>Linked scales</h3>
+      <ul>
+        {selectedScales.map(scale =>
+          <li>{scale}</li>
+        )}
+      </ul>
 
       <Button loading={isLoading} type='primary' onClick={finishAndPostNewItem}>
         Done
