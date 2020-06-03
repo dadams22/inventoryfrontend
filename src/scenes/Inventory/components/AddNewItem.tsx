@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Steps, Button, message, Form, Input, Select } from 'antd';
 import { useSelector } from 'react-redux';
-import { ApplicationState, InventoryItem } from '../services/types';
+import { ApplicationState, InventoryItem } from '../../../services/types';
 
 const { Step } = Steps;
 const { Option } = Select;
