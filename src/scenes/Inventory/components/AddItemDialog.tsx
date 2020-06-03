@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { Steps, Button, message, Form, Input, Select, Descriptions, Tag } from 'antd';
+import { Steps, Button, message, Form, Input, Select, Descriptions, Tag, Modal } from 'antd';
 import { useSelector } from 'react-redux';
 import { ApplicationState, InventoryItem } from '../../../services/types';
 
 const { Step } = Steps;
 const { Option } = Select;
 
-interface AddNewItemProps {
+interface Props {
+  visible: boolean;
   closeModal: () => void
 }
 
-function AddItemDialog(props: AddNewItemProps) {
+const AddItemDialog = ({
+  visible,
+  closeModal
+}: Props) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [itemName, setItemName] = useState('');
   const [itemDescription, setItemDescription] = useState('');
@@ -66,7 +70,7 @@ function AddItemDialog(props: AddNewItemProps) {
       .then(() => {
         // After success, message and close modal
         initializeState();
-        props.closeModal();
+        closeModal();
         message.success('Item successfully paired with scale and added to inventory!');
       })
 
@@ -163,7 +167,16 @@ function AddItemDialog(props: AddNewItemProps) {
   ];
 
   return (
-    <>
+    <Modal
+      title='Add new item'
+      visible={visible}
+      onCancel={closeModal}
+      footer={[
+        <Button key='cancel' onClick={closeModal}>
+          Cancel
+        </Button>
+      ]}
+    >
       <Steps current={currentStep}>
         {steps.map(item => (
           <Step key={item.title} title={item.title} />
@@ -171,7 +184,8 @@ function AddItemDialog(props: AddNewItemProps) {
       </Steps>
 
       {steps[currentStep].content}
-    </>
+    </Modal>
   );
-}
+};
+
 export default AddItemDialog;

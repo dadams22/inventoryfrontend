@@ -63,18 +63,7 @@ function Inventory() {
           <Table dataSource={dataSource} columns={columns} />
         </Col>
       </Row>
-      <Modal
-        title='Add new item'
-        visible={isAddNewItemVisible}
-        onCancel={() => setAddNewItemVisible(false)}
-        footer={[
-          <Button key='cancel' onClick={() => setAddNewItemVisible(false)}>
-            Cancel
-          </Button>
-        ]}
-      >
-        <AddItemDialog closeModal={() => setAddNewItemVisible(false)} />
-      </Modal>
+      <AddItemDialog visible={isAddNewItemVisible} closeModal={() => setAddNewItemVisible(false)}/>
     </>
   );
 }
