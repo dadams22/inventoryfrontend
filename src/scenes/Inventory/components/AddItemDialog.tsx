@@ -10,7 +10,7 @@ interface AddNewItemProps {
   closeModal: () => void
 }
 
-function AddNewItem(props: AddNewItemProps) {
+function AddItemDialog(props: AddNewItemProps) {
 
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -187,4 +187,4 @@ function AddNewItem(props: AddNewItemProps) {
     </>
   );
 }
-export default AddNewItem;
+export default AddItemDialog;

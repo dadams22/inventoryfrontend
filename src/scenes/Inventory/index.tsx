@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 import { ApplicationState, InventoryItem } from '../../services/types';
 import SearchBar from '../../components/SearchBar';
-import AddNewItem from './components/AddNewItem';
+import AddItemDialog from './components/AddItemDialog';
 
 function Inventory() {
   const items = useSelector((state: ApplicationState) => state.items);
@@ -73,7 +73,7 @@ function Inventory() {
           </Button>
         ]}
       >
-        <AddNewItem closeModal={() => setAddNewItemVisible(false)} />
+        <AddItemDialog closeModal={() => setAddNewItemVisible(false)} />
       </Modal>
     </>
   );
