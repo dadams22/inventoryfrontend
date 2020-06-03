@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { ApplicationState, InventoryItem } from '../../services/types';
 import { useSelector } from 'react-redux';
-import { Button, Col, Row, Table } from 'antd';
+import { Button, Col, Row, Table, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
+import { ApplicationState, InventoryItem } from '../../services/types';
 import SearchBar from '../../components/SearchBar';
+import AddNewItem from '../../components/AddNewItem';
 
 function Inventory() {
   const items = useSelector((state: ApplicationState) => state.items);
   const [searchValue, setSearchValue] = useState('');
+  const [isAddNewItemVisible, setAddNewItemVisible] = useState(false);
 
   const dataSource = items
     .filter((item) =>
@@ -24,7 +26,7 @@ function Inventory() {
       sorter: (a: InventoryItem, b: InventoryItem) =>
         a.name.localeCompare(b.name),
       render: (name: string, record: InventoryItem) => (
-        <Link to={`/inventory`}>{name}</Link>
+        <Link to='/inventory'>{name}</Link>
       ),
     },
     {
@@ -42,24 +44,32 @@ function Inventory() {
           <SearchBar
             searchValue={searchValue}
             onChange={setSearchValue}
-            placeholder={'Search items by name...'}
+            placeholder='Search items by name...'
           />
         </Col>
         <Col span={3} offset={11}>
           <Button
-            type={'primary'}
+            type='primary'
             icon={<PlusOutlined />}
             style={{ float: 'right' }}
+            onClick={() => setAddNewItemVisible(true)}
           >
             Add a New Item
           </Button>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify='center'>
         <Col span={18}>
           <Table dataSource={dataSource} columns={columns} />
         </Col>
       </Row>
+      <Modal
+        title='Add new item'
+        visible={isAddNewItemVisible}
+        onCancel={() => setAddNewItemVisible(false)}
+      >
+        <AddNewItem />
+      </Modal>
     </>
   );
 }
