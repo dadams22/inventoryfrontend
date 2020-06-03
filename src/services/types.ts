@@ -1,16 +1,15 @@
 export interface ApplicationState {
-    items: InventoryItem[];
-    scales: Scale[];
+  items: InventoryItem[];
+  scales: Scale[];
 }
 
-
 export interface InventoryItem {
-    id: number;
-    name: string;
-    weight: number;
+  id: number;
+  name: string;
+  weight: number;
 }
 
 export interface Scale {
-    id: number;
-    inUse: boolean;
+  id: number;
+  inUse: boolean;
 }

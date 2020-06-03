@@ -1,5 +1,3 @@
-export const actionTypes = {
-
-};
+export const actionTypes = {};
 
 export type ApplicationAction = any;
