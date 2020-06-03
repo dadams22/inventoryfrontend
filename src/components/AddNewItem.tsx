@@ -1,24 +1,154 @@
 import React, { useState } from 'react';
-import { Steps, Button, message } from 'antd';
+import { Steps, Button, message, Form, Input, Select } from 'antd';
+import { useSelector } from 'react-redux';
+import { ApplicationState, InventoryItem } from '../services/types';
 
 const { Step } = Steps;
+const { Option } = Select;
 
-function AddNewItem() {
+interface AddNewItemProps {
+  closeModal: () => void
+}
+
+function AddNewItem(props: AddNewItemProps) {
   const [currentStep, setCurrentStep] = useState(0);
+  const [itemName, setItemName] = useState('');
+  const [itemDescription, setItemDescription] = useState('');
+  const [selectedScales, setSelectedScales] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
+  const scales = useSelector((state: ApplicationState) => state.scales);
+  const scalesDataSource = scales
+    .filter((scale) => (!scale.inUse))
+    .map((scale) => (<Option value={scale.id} key={scale.id}>{scale.id}</Option>));
+
+  const previousButton = (
+    <Button style={{ margin: '0 8px' }} onClick={() => setCurrentStep(currentStep - 1)}>
+      Previous
+    </Button>
+  );
+
+  const onFinishFirstStep = (values: any) => {
+    console.log('Success: ', values);
+
+    // Grab item name, description
+    setItemName(values.itemName);
+    setItemDescription(values.itemDescription);
+    setCurrentStep(currentStep + 1);
+  }
+
+  const onFinishSecondStep = (values: any) => {
+    console.log('Success: ', values);
+
+    // Grab selected scales
+    setSelectedScales(values.selectedScales);
+    setCurrentStep(currentStep + 1);
+  }
+
+  const onFinishFailed = (values: any) => {
+    console.log('Failure: ', values);
+  }
+
+  const finishAndPostNewItem = () => {
+    // Begin 'loading' and attempt to post to database
+    setLoading(true);
+
+    return new Promise( resolve => setTimeout(resolve, 2000))
+      .then(() => {
+        // After success, message and close modal
+        setLoading(false);
+        props.closeModal();
+        message.success('Item successfully paired with scale and added to inventory!');
+      })
+
+  }
+
+  const firstStep = (
+    <>
+      <Form
+        layout='vertical'
+        onFinish={onFinishFirstStep}
+        onFinishFailed={onFinishFailed}
+      >
+        <Form.Item
+          name='itemName'
+          label='Name'
+          rules={[{ required: true, message: 'Please enter the new item\'s name.' }]}
+        >
+          <Input placeholder='New item name' />
+        </Form.Item>
+
+        <Form.Item
+          name='itemDescription'
+          label='Description'
+        >
+          <Input.TextArea placeholder='New item description' />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type='primary' htmlType='submit'>Next</Button>
+        </Form.Item>
+      </Form>
+    </>
+  )
+
+  const secondStep = (
+    <>
+      <Form
+        layout='vertical'
+        onFinish={onFinishSecondStep}
+        onFinishFailed={onFinishFailed}
+      >
+        <Form.Item
+          name='selectedScales'
+          label='Scales'
+          rules={[{ required: true, message: 'Please select at least one scale.' }]}
+        >
+          <Select
+            mode='multiple'
+            placeholder='Please select scales'
+            style={{ width: '100%' }}
+          >
+            {scalesDataSource}
+          </Select>
+        </Form.Item>
+
+        <Form.Item>
+          <Button type='primary' htmlType='submit'>Next</Button>
+        </Form.Item>
+
+        {previousButton}
+      </Form>
+    </>
+  )
+
+  const thirdStep = (
+    <>
+      <p>{itemName}</p>
+      <p>{itemDescription}</p>
+      <p>{selectedScales}</p>
+
+      <Button loading={isLoading} type='primary' onClick={finishAndPostNewItem}>
+        Done
+      </Button>
+
+      {previousButton}
+    </>
+  )
 
   const steps = [
     {
-      title: 'First',
-      content: 'First-content',
+      title: 'Item Info',
+      content: firstStep
     },
     {
-      title: 'Second',
-      content: 'Second-content',
+      title: 'Scale Pairing',
+      content: secondStep
     },
     {
-      title: 'Last',
-      content: 'Last-content',
-    },
+      title: 'Review',
+      content: thirdStep
+    }
   ];
 
   return (
@@ -28,23 +158,8 @@ function AddNewItem() {
           <Step key={item.title} title={item.title} />
         ))}
       </Steps>
-      <div>
-        {currentStep < steps.length - 1 && (
-          <Button type='primary' onClick={() => setCurrentStep(currentStep + 1)}>
-            Next
-          </Button>
-        )}
-        {currentStep === steps.length - 1 && (
-          <Button type='primary' onClick={() => message.success('Processing complete!')}>
-            Done
-          </Button>
-        )}
-        {currentStep > 0 && (
-          <Button style={{ margin: '0 8px' }} onClick={() => setCurrentStep(currentStep - 1)}>
-            Previous
-          </Button>
-        )}
-      </div>
+
+      {steps[currentStep].content}
     </>
   );
 }

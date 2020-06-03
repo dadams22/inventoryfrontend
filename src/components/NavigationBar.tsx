@@ -13,13 +13,13 @@ const NavigationBar = ({ location }: RouteComponentProps) => {
     .map((tab) => tab.name);
 
   return (
-    <Menu mode={'horizontal'} selectedKeys={selectedKeys}>
+    <Menu mode='horizontal' selectedKeys={selectedKeys}>
       {tabs.map((tab) => (
         <Menu.Item key={tab.name}>
           <Link to={tab.path}>{tab.name}</Link>
         </Menu.Item>
       ))}
-      <Button danger shape={'round'}>
+      <Button danger shape='round'>
         Sign Out
       </Button>
     </Menu>

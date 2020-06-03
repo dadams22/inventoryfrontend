@@ -67,8 +67,13 @@ function Inventory() {
         title='Add new item'
         visible={isAddNewItemVisible}
         onCancel={() => setAddNewItemVisible(false)}
+        footer={[
+          <Button key='cancel' onClick={() => setAddNewItemVisible(false)}>
+            Cancel
+          </Button>
+        ]}
       >
-        <AddNewItem />
+        <AddNewItem closeModal={() => setAddNewItemVisible(false)} />
       </Modal>
     </>
   );
