@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Steps, Button, message, Form, Input, Select } from 'antd';
+import { Steps, Button, message, Form, Input, Select, Descriptions, Tag } from 'antd';
 import { useSelector } from 'react-redux';
 import { ApplicationState, InventoryItem } from '../../../services/types';
 
@@ -11,8 +11,6 @@ interface AddNewItemProps {
 }
 
 function AddItemDialog(props: AddNewItemProps) {
-
-
   const [currentStep, setCurrentStep] = useState(0);
   const [itemName, setItemName] = useState('');
   const [itemDescription, setItemDescription] = useState('');
@@ -135,27 +133,16 @@ function AddItemDialog(props: AddNewItemProps) {
 
   const thirdStep = (
     <>
-      <h3>Item name</h3>
-      <ul>
-        <li>{itemName}</li>
-      </ul>
-
-      <h3>Item description</h3>
-      <ul>
-        <li>{itemDescription}</li>
-      </ul>
-
-      <h3>Linked scales</h3>
-      <ul>
-        {selectedScales.map(scale =>
-          <li>{scale}</li>
-        )}
-      </ul>
-
+      <Descriptions title='Item Overview'>
+        <Descriptions.Item label='Name'>{itemName}</Descriptions.Item>
+        <Descriptions.Item label='Description'>{itemDescription}</Descriptions.Item>
+        <Descriptions.Item label='Linked Scales'>
+          {selectedScales.map(scale => <Tag>{scale}</Tag>)}
+        </Descriptions.Item>
+      </Descriptions>
       <Button loading={isLoading} type='primary' onClick={finishAndPostNewItem}>
         Done
       </Button>
-
       {previousButton}
     </>
   )
