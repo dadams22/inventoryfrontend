@@ -1,23 +1,12 @@
 import React, { useState } from 'react';
-import {
-  Steps,
-  Button,
-  Form,
-  Modal,
-} from 'antd';
+import { Steps, Button, Form, Modal } from 'antd';
 import { FormInstance } from 'antd/es/form';
 import ItemInfo from './components/ItemInfo';
 import LinkScales from './components/LinkScales';
 import ReviewInfo from './components/ReviewInfo';
-import { InventoryItem } from '../../../../services/types';
+import { FormData } from './types';
 
 const { Step } = Steps;
-
-export type FormData = {
-  name: string;
-  description?: string;
-  scales: number[];
-};
 
 interface Props {
   visible: boolean;

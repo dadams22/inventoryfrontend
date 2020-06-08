@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Col, Row, Table, Modal } from 'antd';
+import { Button, Col, Row, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 import { ApplicationState, InventoryItem } from '../../services/types';
@@ -25,9 +25,7 @@ function Inventory() {
       key: 'name',
       sorter: (a: InventoryItem, b: InventoryItem) =>
         a.name.localeCompare(b.name),
-      render: (name: string) => (
-        <Link to='/inventory'>{name}</Link>
-      ),
+      render: (name: string) => <Link to='/inventory'>{name}</Link>,
     },
     {
       title: 'Weight (lbs.)',

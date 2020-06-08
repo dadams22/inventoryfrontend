@@ -25,7 +25,7 @@ function Scales() {
       key: 'inUse',
       sorter: (a: Scale, b: Scale) => Number(a.inUse) - Number(b.inUse),
       render: (inUse: boolean) =>
-        inUse ? <Tag>In Use</Tag> : <Tag color={'green'}>Available</Tag>,
+        inUse ? <Tag>In Use</Tag> : <Tag color='green'>Available</Tag>,
     },
   ];
 

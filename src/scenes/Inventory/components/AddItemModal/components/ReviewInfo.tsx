@@ -1,6 +1,6 @@
 import React from 'react';
 import { Descriptions, Tag } from 'antd';
-import { FormData } from '../index';
+import { FormData } from '../types';
 
 interface Props {
   formData: FormData;
