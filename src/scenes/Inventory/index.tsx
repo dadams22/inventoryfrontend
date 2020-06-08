@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 import { ApplicationState, InventoryItem } from '../../services/types';
 import SearchBar from '../../components/SearchBar';
-import AddItemDialog from './components/AddItemDialog';
+import AddItemModal from './components/AddItemModal';
 
 function Inventory() {
   const items = useSelector((state: ApplicationState) => state.items);
   const [searchValue, setSearchValue] = useState('');
-  const [isAddNewItemVisible, setAddNewItemVisible] = useState(false);
+  const [addItemDialogState, setAddItemDialogState] = useState(false);
 
   const dataSource = items
     .filter((item) =>
@@ -52,7 +52,7 @@ function Inventory() {
             type='primary'
             icon={<PlusOutlined />}
             style={{ float: 'right' }}
-            onClick={() => setAddNewItemVisible(true)}
+            onClick={() => setAddItemDialogState(true)}
           >
             Add a New Item
           </Button>
@@ -63,7 +63,10 @@ function Inventory() {
           <Table dataSource={dataSource} columns={columns} />
         </Col>
       </Row>
-      <AddItemDialog visible={isAddNewItemVisible} closeModal={() => setAddNewItemVisible(false)}/>
+      <AddItemModal
+        visible={addItemDialogState}
+        closeModal={() => setAddItemDialogState(false)}
+      />
     </>
   );
 }
