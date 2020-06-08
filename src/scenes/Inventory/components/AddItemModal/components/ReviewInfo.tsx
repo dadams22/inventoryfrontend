@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormInstance } from 'antd/lib/form';
 import { Descriptions, Tag } from 'antd';
 import { FormData } from '../index';
 

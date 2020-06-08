@@ -53,7 +53,7 @@ const initialState: ApplicationState = {
   ],
 };
 
-export function applicationReducer(
+export default function applicationReducer(
   state = initialState,
   action: ApplicationAction,
 ) {

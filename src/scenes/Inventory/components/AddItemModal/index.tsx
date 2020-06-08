@@ -3,18 +3,13 @@ import {
   Steps,
   Button,
   Form,
-  Input,
-  Select,
-  Descriptions,
-  Tag,
   Modal,
 } from 'antd';
-import { useSelector } from 'react-redux';
-import { ApplicationState, InventoryItem } from '../../../../services/types';
+import { FormInstance } from 'antd/es/form';
 import ItemInfo from './components/ItemInfo';
 import LinkScales from './components/LinkScales';
-import { FormInstance } from 'antd/es/form';
 import ReviewInfo from './components/ReviewInfo';
+import { InventoryItem } from '../../../../services/types';
 
 const { Step } = Steps;
 

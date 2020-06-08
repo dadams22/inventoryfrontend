@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Row, Table, Tag } from 'antd';
-import SearchBar from '../../components/SearchBar';
 import { useSelector } from 'react-redux';
+import SearchBar from '../../components/SearchBar';
 import { ApplicationState, Scale } from '../../services/types';
 
 function Scales() {
@@ -36,11 +36,11 @@ function Scales() {
           <SearchBar
             searchValue={searchValue}
             onChange={setSearchValue}
-            placeholder={'Search scales by id...'}
+            placeholder='Search scales by id...'
           />
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify='center'>
         <Col span={18}>
           <Table dataSource={dataSource} columns={columns} />
         </Col>

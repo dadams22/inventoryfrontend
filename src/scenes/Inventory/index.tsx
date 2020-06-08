@@ -25,7 +25,7 @@ function Inventory() {
       key: 'name',
       sorter: (a: InventoryItem, b: InventoryItem) =>
         a.name.localeCompare(b.name),
-      render: (name: string, record: InventoryItem) => (
+      render: (name: string) => (
         <Link to='/inventory'>{name}</Link>
       ),
     },
