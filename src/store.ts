@@ -1,5 +1,10 @@
-import { applyMiddleware, createStore } from 'redux';
-import applicationReducer from './services/reducer';
 import { logger } from 'redux-logger';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import applicationReducer from './services/reducer';
 
-export const store = createStore(applicationReducer, applyMiddleware(logger));
+const store = configureStore({
+  reducer: applicationReducer,
+  middleware: [...getDefaultMiddleware(), logger],
+});
+
+export default store;
