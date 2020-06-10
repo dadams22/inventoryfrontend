@@ -26,7 +26,6 @@ function Login() {
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             label='Password'
             name='password'
@@ -34,10 +33,9 @@ function Login() {
           >
             <Input.Password />
           </Form.Item>
-
           <Form.Item>
             <Button type='primary' htmlType='submit'>
-              Submit
+              Login
             </Button>
           </Form.Item>
         </Form>
