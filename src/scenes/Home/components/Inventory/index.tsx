@@ -3,16 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Row, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
-import { ApplicationState } from '../../store';
-import { fetchItems, InventoryItem } from '../../services/items';
+import { ApplicationState } from '../../../../store';
+import { fetchItems, InventoryItem } from '../../../../services/items';
 
 function Inventory() {
   const items = useSelector((state: ApplicationState) => state.items.items);
 
   const dispatch = useDispatch();
-  useEffect(() => { dispatch(fetchItems()) });
+  useEffect(() => {
+    if (items.length === 0) {
+      dispatch(fetchItems());
+    }
+  });
 
   const [searchValue, setSearchValue] = useState('');
   const [addItemDialogState, setAddItemDialogState] = useState(false);

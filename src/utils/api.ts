@@ -10,6 +10,16 @@ export const setTokenAuth = (token: string) => {
   apiInstance.defaults.headers.common.Authorization = `JWT ${token}`;
 };
 
+export const isAuthenticated = (): boolean => {
+  const token = localStorage.getItem('token');
+  if (token !== null) {
+    setTokenAuth(token);
+    return true;
+  } else {
+    return false;
+  }
+};
+
 export const removeTokenAuth = () => {
   localStorage.removeItem('token');
   apiInstance.defaults.headers.common.Authorization = undefined;

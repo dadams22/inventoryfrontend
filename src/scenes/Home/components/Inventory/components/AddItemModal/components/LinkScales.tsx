@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Select } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { useSelector } from 'react-redux';
-import { ApplicationState } from '../../../../../store';
+import { ApplicationState } from '../../../../../../../store';
 
 interface Props {
   form: FormInstance;

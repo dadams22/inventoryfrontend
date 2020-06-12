@@ -1,12 +1,16 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Form, Input, Button, Row, Col } from 'antd';
-import { useDispatch } from 'react-redux';
 import { login } from '../../services/user';
+import { ApplicationState } from '../../store';
 
 function Login() {
+  const authenticated = useSelector((state: ApplicationState) => state.user.authenticated);
+
   const dispatch = useDispatch();
 
-  return (
+  return authenticated ? <Redirect to='/' /> : (
     <Row align='middle' justify='center' style={{ minHeight: '100vh' }}>
       <Col span={6}>
         <Form

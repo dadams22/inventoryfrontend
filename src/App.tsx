@@ -3,25 +3,18 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { Layout } from 'antd';
 import Login from './scenes/Login';
-import NavigationBar from './components/NavigationBar';
-import Inventory from './scenes/Inventory';
-import Scales from './scenes/Scales';
 
-const { Content } = Layout;
+import Home from './scenes/Home';
 
 function App() {
   return (
     <div className='App'>
       <Router>
         <Layout>
-          <NavigationBar />
-          <Content>
-            <Switch>
-              <Route path='/login' component={Login} />
-              <Route path='/inventory' component={Inventory} />
-              <Route path='/scales' component={Scales} />
-            </Switch>
-          </Content>
+          <Switch>
+            <Route path='/login' component={Login} />
+            <Route path='/' component={Home} />
+          </Switch>
         </Layout>
       </Router>
     </div>
