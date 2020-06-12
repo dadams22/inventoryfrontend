@@ -3,12 +3,13 @@ import { useSelector } from 'react-redux';
 import { Button, Col, Row, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
-import { ApplicationState, InventoryItem } from '../../services/types';
 import SearchBar from '../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
+import { ApplicationState } from '../../store';
+import { InventoryItem } from '../../services/items';
 
 function Inventory() {
-  const items = useSelector((state: ApplicationState) => state.items);
+  const items = useSelector((state: ApplicationState) => state.items.items);
   const [searchValue, setSearchValue] = useState('');
   const [addItemDialogState, setAddItemDialogState] = useState(false);
 

@@ -6,15 +6,17 @@ export interface InventoryItem {
   weight: number;
 }
 
-const initialState = {
-  items: []
+export interface ItemsState {
+  items: InventoryItem[];
+}
+
+const initialState: ItemsState = {
+  items: [],
 };
 
 export const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {},
-  extraReducers: builder => {
-
-  }
+  extraReducers: (builder) => {},
 });
