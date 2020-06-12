@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 import NavigationBar from '../../components/NavigationBar';
 import Inventory from './components/Inventory';
-import Scales from './Scales';
+import Scales from './components/Scales';
 import { useSelector } from 'react-redux';
 import { ApplicationState } from '../../store';
 

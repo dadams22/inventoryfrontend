@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row, Table, Tag } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchBar from '../../../components/SearchBar';
-import { ApplicationState } from '../../../store';
-import { fetchScales, Scale } from '../../../services/scales';
+import SearchBar from '../../../../components/SearchBar';
+import { ApplicationState } from '../../../../store';
+import { fetchScales, Scale } from '../../../../services/scales';
 
 function Scales() {
   const scales = useSelector((state: ApplicationState) => state.scales.scales);
