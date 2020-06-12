@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+// TODO: create a better api wrapper to encapsulate all of this
+
 const API_BASE_URL = 'http://127.0.0.1:8000/api';
 const apiInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -15,9 +17,8 @@ export const isAuthenticated = (): boolean => {
   if (token !== null) {
     setTokenAuth(token);
     return true;
-  } else {
-    return false;
   }
+  return false;
 };
 
 export const removeTokenAuth = () => {
