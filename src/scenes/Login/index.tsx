@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
-import { login } from '../../services/actions';
+import { login } from '../../services/user';
 
 function Login() {
   const dispatch = useDispatch();
