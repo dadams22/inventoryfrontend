@@ -18,13 +18,10 @@ const initialState: ItemsState = {
   items: [],
 };
 
-export const fetchItems = createAsyncThunk(
-  'FETCH_ITEMS',
-  async () => {
-    const response = await apiInstance.get('/items');
-    return response.data;
-  }
-);
+export const fetchItems = createAsyncThunk('FETCH_ITEMS', async () => {
+  const response = await apiInstance.get('/items');
+  return response.data;
+});
 
 export const itemsSlice = createSlice({
   name: 'items',
@@ -36,7 +33,7 @@ export const itemsSlice = createSlice({
       return {
         ...state,
         items,
-      }
-    })
+      };
+    });
   },
 });

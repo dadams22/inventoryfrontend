@@ -7,11 +7,14 @@ import Scales from './components/Scales';
 import { useSelector } from 'react-redux';
 import { ApplicationState } from '../../store';
 
-
 function Home() {
-  const authenticated = useSelector((state: ApplicationState) => state.user.authenticated);
+  const authenticated = useSelector(
+    (state: ApplicationState) => state.user.authenticated,
+  );
 
-  return !authenticated ? <Redirect to='/login' /> : (
+  return !authenticated ? (
+    <Redirect to='/login' />
+  ) : (
     <>
       <NavigationBar />
       <Layout.Content>
@@ -22,7 +25,7 @@ function Home() {
         </Switch>
       </Layout.Content>
     </>
-  )
+  );
 }
 
 export default Home;

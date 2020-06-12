@@ -1,5 +1,9 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import apiInstance, { isAuthenticated, removeTokenAuth, setTokenAuth } from '../utils/api';
+import apiInstance, {
+  isAuthenticated,
+  removeTokenAuth,
+  setTokenAuth,
+} from '../utils/api';
 
 export interface UserState {
   authenticated: boolean;
@@ -22,8 +26,7 @@ export const logout = createAction('LOGOUT');
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       const { token } = action.payload;
@@ -38,6 +41,6 @@ export const userSlice = createSlice({
     builder.addCase(logout, (state) => {
       removeTokenAuth();
       return { ...state, authenticated: false };
-    })
+    });
   },
 });

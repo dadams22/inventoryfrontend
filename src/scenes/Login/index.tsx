@@ -6,11 +6,15 @@ import { login } from '../../services/user';
 import { ApplicationState } from '../../store';
 
 function Login() {
-  const authenticated = useSelector((state: ApplicationState) => state.user.authenticated);
+  const authenticated = useSelector(
+    (state: ApplicationState) => state.user.authenticated,
+  );
 
   const dispatch = useDispatch();
 
-  return authenticated ? <Redirect to='/' /> : (
+  return authenticated ? (
+    <Redirect to='/' />
+  ) : (
     <Row align='middle' justify='center' style={{ minHeight: '100vh' }}>
       <Col span={6}>
         <Form
