@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import apiInstance from '../utils/api';
+import apiInstance, { setTokenAuth } from '../utils/api';
 
 export interface UserState {
-  token?: string;
+  authenticated: boolean;
 }
 
-const initialState: UserState = {};
+const initialState: UserState = {
+  authenticated: false,
+};
 
 export const login = createAsyncThunk(
   'LOGIN',
@@ -22,11 +24,11 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       const { token } = action.payload;
-      // TODO: should probably move the setting of the Authorization header to somewhere outside the reducer
-      apiInstance.defaults.headers.common.Authorization = `JWT ${token}`;
+      // TODO: should probably move the setting of the Authorization header and storage of token to somewhere outside the reducer
+      setTokenAuth(token);
       return {
         ...state,
-        token,
+        authenticated: true,
       };
     });
   },
