@@ -5,9 +5,11 @@ import {
   getDefaultMiddleware,
 } from '@reduxjs/toolkit';
 import { userSlice } from './services/user';
+import { itemsSlice } from './services/items';
 
 const applicationReducer = combineReducers({
   user: userSlice.reducer,
+  items: itemsSlice.reducer,
 });
 
 export type ApplicationState = ReturnType<typeof applicationReducer>;
