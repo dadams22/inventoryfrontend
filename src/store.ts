@@ -1,5 +1,24 @@
-import { applyMiddleware, createStore } from 'redux';
-import applicationReducer from './services/reducer';
 import { logger } from 'redux-logger';
+import {
+  combineReducers,
+  configureStore,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit';
+import { userSlice } from './services/user';
+import { itemsSlice } from './services/items';
+import { scalesSlice } from './services/scales';
 
-export const store = createStore(applicationReducer, applyMiddleware(logger));
+const applicationReducer = combineReducers({
+  user: userSlice.reducer,
+  items: itemsSlice.reducer,
+  scales: scalesSlice.reducer,
+});
+
+export type ApplicationState = ReturnType<typeof applicationReducer>;
+
+const store = configureStore({
+  reducer: applicationReducer,
+  middleware: [...getDefaultMiddleware(), logger],
+});
+
+export default store;

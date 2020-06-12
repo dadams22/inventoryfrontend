@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row, Table, Tag } from 'antd';
-import { useSelector } from 'react-redux';
-import SearchBar from '../../components/SearchBar';
-import { ApplicationState, Scale } from '../../services/types';
+import { useDispatch, useSelector } from 'react-redux';
+import SearchBar from '../../../../components/SearchBar';
+import { ApplicationState } from '../../../../store';
+import { fetchScales, Scale } from '../../../../services/scales';
 
 function Scales() {
-  const scales = useSelector((state: ApplicationState) => state.scales);
+  const scales = useSelector((state: ApplicationState) => state.scales.scales);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (scales.length === 0) {
+      dispatch(fetchScales());
+    }
+  });
+
   const [searchValue, setSearchValue] = useState('');
 
   const dataSource = scales
@@ -23,7 +32,8 @@ function Scales() {
       title: 'Availability',
       dataIndex: 'inUse',
       key: 'inUse',
-      sorter: (a: Scale, b: Scale) => Number(a.inUse) - Number(b.inUse),
+      sorter: (a: Scale, b: Scale) =>
+        Number(Boolean(a.item)) - Number(Boolean(b.item)),
       render: (inUse: boolean) =>
         inUse ? <Tag>In Use</Tag> : <Tag color='green'>Available</Tag>,
     },

@@ -1,33 +1,39 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Form, Input, Button, Row, Col } from 'antd';
+import { login } from '../../services/user';
+import { ApplicationState } from '../../store';
 
 function Login() {
-  // TODO: - Create a type for values instead of using Object or any
-  const onFinish = (values: Object) => {
-    console.log('Success:', values);
-  };
+  const authenticated = useSelector(
+    (state: ApplicationState) => state.user.authenticated,
+  );
 
-  const onFinishFailed = (errorInfo: Object) => {
-    console.log('Failed:', errorInfo);
-  };
+  const dispatch = useDispatch();
 
-  return (
+  return authenticated ? (
+    <Redirect to='/' />
+  ) : (
     <Row align='middle' justify='center' style={{ minHeight: '100vh' }}>
       <Col span={6}>
         <Form
           name='basic'
           initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={(values) => {
+            // TODO: fix onFinish and typing
+            console.log(values);
+            // @ts-ignore
+            dispatch(login(values));
+          }}
         >
           <Form.Item
-            label='Email'
-            name='email'
-            rules={[{ required: true, message: 'Please enter your email.' }]}
+            label='Username'
+            name='username'
+            rules={[{ required: true, message: 'Please enter your username.' }]}
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             label='Password'
             name='password'
@@ -35,10 +41,9 @@ function Login() {
           >
             <Input.Password />
           </Form.Item>
-
           <Form.Item>
             <Button type='primary' htmlType='submit'>
-              Submit
+              Login
             </Button>
           </Form.Item>
         </Form>
