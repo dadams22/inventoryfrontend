@@ -33,7 +33,7 @@ function Scales() {
       dataIndex: 'item',
       key: 'item',
       sorter: (a: Scale, b: Scale) =>
-        Number(Boolean(a.item)) - Number(Boolean(b.item)),
+        Number(a.item !== null) - Number(b.item !== null),
       render: (item: number) =>
         item === null ? <Tag>In Use</Tag> : <Tag color='green'>Available</Tag>,
     },
