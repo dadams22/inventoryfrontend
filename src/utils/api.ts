@@ -1,12 +1,5 @@
 import axios from 'axios';
 
-// TODO add types for function arguments and the data returned from the api
-
-type LoginType = {
-  username: string;
-  password: string;
-};
-
 class ApiWrapper {
   API_BASE_URL = 'http://127.0.0.1:8000/api';
 
@@ -37,7 +30,7 @@ class ApiWrapper {
     });
   }
 
-  async login(payload: LoginType) {
+  async login(payload: { username: string; password: string }) {
     const response = await this.instance.post('/token-auth', payload);
     const { token } = response.data;
     this.setTokenAuth(token);
