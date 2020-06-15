@@ -1,23 +1,18 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import apiInstance, {
-  isAuthenticated,
-  removeTokenAuth,
-  setTokenAuth,
-} from '../utils/api';
+import apiInstance from '../utils/api';
 
 export interface UserState {
   authenticated: boolean;
 }
 
 const initialState: UserState = {
-  authenticated: isAuthenticated(),
+  authenticated: apiInstance.isAuthenticated(),
 };
 
 export const login = createAsyncThunk(
   'LOGIN',
   async (payload: { username: string; password: string }) => {
-    const response = await apiInstance.post('/token-auth', payload);
-    return response.data;
+    return apiInstance.login(payload);
   },
 );
 
@@ -28,10 +23,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(login.fulfilled, (state, action) => {
-      const { token } = action.payload;
-      // TODO: should probably move the setting of the Authorization header and storage of token to somewhere outside the reducer
-      setTokenAuth(token);
+    builder.addCase(login.fulfilled, (state) => {
       return {
         ...state,
         authenticated: true,
@@ -39,7 +31,7 @@ export const userSlice = createSlice({
     });
     // TODO: should probably not have this in extraReducers and shoulr probably move removeTokenAuth somewhere else
     builder.addCase(logout, (state) => {
-      removeTokenAuth();
+      apiInstance.removeTokenAuth();
       return { ...state, authenticated: false };
     });
   },

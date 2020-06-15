@@ -17,8 +17,7 @@ const initialState: ScalesState = {
 };
 
 export const fetchScales = createAsyncThunk('FETCH_SCALES', async () => {
-  const response = await apiInstance.get('/scales');
-  return response.data;
+  return apiInstance.fetchScales();
 });
 
 export const scalesSlice = createSlice({

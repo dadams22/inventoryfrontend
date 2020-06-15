@@ -6,7 +6,7 @@ export interface InventoryItem {
   name: string;
   description: string;
   weight: number;
-  created_at: any;
+  // created_at: any;
   site: number;
 }
 
@@ -19,8 +19,7 @@ const initialState: ItemsState = {
 };
 
 export const fetchItems = createAsyncThunk('FETCH_ITEMS', async () => {
-  const response = await apiInstance.get('/items');
-  return response.data;
+  return apiInstance.fetchItems();
 });
 
 export const itemsSlice = createSlice({
