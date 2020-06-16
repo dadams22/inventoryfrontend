@@ -17,15 +17,28 @@ const NavigationBar = ({ location }: RouteComponentProps) => {
     .map((tab) => tab.name);
 
   return (
-    <Menu mode='horizontal' selectedKeys={selectedKeys}>
+    <Menu
+      style={{
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+      mode='horizontal'
+      selectedKeys={selectedKeys}
+    >
       {tabs.map((tab) => (
         <Menu.Item key={tab.name}>
           <Link to={tab.path}>{tab.name}</Link>
         </Menu.Item>
       ))}
-      <Button danger shape='round' onClick={() => dispatch(logout())}>
-        Sign Out
-      </Button>
+      <Menu.Item
+        disabled
+        style={{ cursor: 'default', position: 'absolute', top: 0, right: 0 }}
+      >
+        <Button danger shape='round' onClick={() => dispatch(logout())}>
+          Sign Out
+        </Button>
+      </Menu.Item>
     </Menu>
   );
 };
