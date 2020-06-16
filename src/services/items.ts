@@ -42,5 +42,12 @@ export const itemsSlice = createSlice({
         items,
       };
     });
+    builder.addCase(createItem.fulfilled, (state, action) => {
+      const newItem = action.payload as InventoryItem;
+      return {
+        ...state,
+        items: [...state.items, newItem],
+      };
+    });
   },
 });

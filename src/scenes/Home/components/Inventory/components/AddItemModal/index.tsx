@@ -46,7 +46,11 @@ const AddItemModal = ({ visible, closeModal }: Props) => {
     );
   };
   const doneButton = (
-    <Button htmlType='submit' type='primary'>
+    <Button
+      htmlType='submit'
+      type='primary'
+      onClick={() => dispatch(createItem(formData))}
+    >
       Done
     </Button>
   );
@@ -77,7 +81,6 @@ const AddItemModal = ({ visible, closeModal }: Props) => {
           ...values,
         });
         setCurrentStep(currentStep + 1);
-        dispatch(createItem(formData));
       }}
     >
       <Modal
