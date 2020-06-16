@@ -35,7 +35,7 @@ function Scales() {
       sorter: (a: Scale, b: Scale) =>
         Number(a.item !== null) - Number(b.item !== null),
       render: (item: number) =>
-        item === null ? <Tag>In Use</Tag> : <Tag color='green'>Available</Tag>,
+        item === null ? <Tag color='green'>Available</Tag> : <Tag>In Use</Tag>,
     },
   ];
 
