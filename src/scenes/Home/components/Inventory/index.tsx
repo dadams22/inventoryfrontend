@@ -53,7 +53,7 @@ function Inventory() {
       title: 'Linked Scales',
       dataIndex: 'scales',
       key: 'scales',
-      render: (scales: number[]) => scales.map(scale => <Tag>{scale}</Tag>),
+      render: (scales: number[]) => scales.map((scale) => <Tag>{scale}</Tag>),
     },
     {
       title: 'Weight (lbs.)',

@@ -24,7 +24,7 @@ const initialState: ItemsState = {
 
 export const fetchItems = createAsyncThunk('FETCH_ITEMS', async () => {
   const data = await apiInstance.fetchItems();
-  data.forEach((item: InventoryItem) => item.weight = (Math.random() * 20));
+  data.forEach((item: InventoryItem) => (item.weight = Math.random() * 20));
   return data;
 });
 
