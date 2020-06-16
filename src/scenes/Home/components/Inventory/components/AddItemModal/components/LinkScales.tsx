@@ -10,7 +10,7 @@ interface Props {
 
 const LinkScales = ({ form }: Props) => {
   const scales = useSelector((state: ApplicationState) => state.scales.scales);
-  const availableScales = scales.filter((scale) => !scale.item);
+  const availableScales = scales.filter((scale) => scale.item === null);
 
   return (
     <Form form={form} name='LinkScales' layout='vertical'>

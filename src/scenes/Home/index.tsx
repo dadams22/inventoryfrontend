@@ -1,10 +1,10 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
+import { useSelector } from 'react-redux';
 import NavigationBar from '../../components/NavigationBar';
 import Inventory from './components/Inventory';
 import Scales from './components/Scales';
-import { useSelector } from 'react-redux';
 import { ApplicationState } from '../../store';
 
 function Home() {
