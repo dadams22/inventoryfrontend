@@ -9,6 +9,7 @@ export interface InventoryItem {
   weight: number;
   created_at: string;
   site: number;
+  scales: number[];
 }
 
 export interface ItemsState {

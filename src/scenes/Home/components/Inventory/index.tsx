@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Col, Row, Table } from 'antd';
+import { Button, Col, Row, Table, Tag } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
@@ -48,6 +48,12 @@ function Inventory() {
       sorter: (a: InventoryItem, b: InventoryItem) =>
         a.created_at.localeCompare(b.created_at),
       render: (created_at: string) => created_at.slice(0, 10),
+    },
+    {
+      title: 'Linked Scales',
+      dataIndex: 'scales',
+      key: 'scales',
+      render: (scales: number[]) => scales.map(scale => <Tag>{scale}</Tag>),
     },
     {
       title: 'Weight (lbs.)',
