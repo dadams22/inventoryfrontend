@@ -24,6 +24,9 @@ function Home() {
           <Route path='/' component={() => <Redirect to='/inventory' />} />
         </Switch>
       </Layout.Content>
+      <Layout.Footer style={{ textAlign: 'center' }}>
+        Visit <a href='http://www.reinventory.info'>reinventory.info</a>
+      </Layout.Footer>
     </>
   );
 }
