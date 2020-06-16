@@ -31,7 +31,7 @@ export const createItem = createAsyncThunk(
   async (payload: Object) => {
     // @ts-ignore
     const data = await apiInstance.createItem(payload);
-    data.weight = (Math.random() * 20).toFixed(2);
+    data.weight = Math.random() * 20;
     return data;
   },
 );
