@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Steps, Button, Form, Modal } from 'antd';
 import { FormInstance } from 'antd/es/form';
 import ItemInfo from './components/ItemInfo';
 import LinkScales from './components/LinkScales';
 import ReviewInfo from './components/ReviewInfo';
 import { FormData } from './types';
-import { createItem } from '../../../../../../services/items';
+import {
+  createItem,
+  setAddItemModalState,
+} from '../../../../../../services/items';
+import { ApplicationState } from '../../../../../../store';
 
 const { Step } = Steps;
 
-interface Props {
-  visible: boolean;
-  closeModal: () => void;
-}
-
-const AddItemModal = ({ visible, closeModal }: Props) => {
+const AddItemModal = () => {
   const dispatch = useDispatch();
+
+  const modalState = useSelector(
+    (state: ApplicationState) => state.items.addItemModalState,
+  );
+
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -85,8 +89,8 @@ const AddItemModal = ({ visible, closeModal }: Props) => {
     >
       <Modal
         title='Add a New Item'
-        visible={visible}
-        onCancel={closeModal}
+        visible={modalState}
+        onCancel={() => dispatch(setAddItemModalState(false))}
         afterClose={resetState}
         footer={steps[currentStep].footer}
       >

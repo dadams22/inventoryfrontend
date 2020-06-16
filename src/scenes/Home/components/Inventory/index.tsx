@@ -6,7 +6,11 @@ import { PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../store';
-import { fetchItems, InventoryItem } from '../../../../services/items';
+import {
+  fetchItems,
+  InventoryItem,
+  setAddItemModalState,
+} from '../../../../services/items';
 
 function Inventory() {
   const items = useSelector((state: ApplicationState) => state.items.items);
@@ -19,7 +23,6 @@ function Inventory() {
   });
 
   const [searchValue, setSearchValue] = useState('');
-  const [addItemDialogState, setAddItemDialogState] = useState(false);
 
   const dataSource = items
     .filter((item) =>
@@ -59,7 +62,7 @@ function Inventory() {
             type='primary'
             icon={<PlusOutlined />}
             style={{ float: 'right' }}
-            onClick={() => setAddItemDialogState(true)}
+            onClick={() => dispatch(setAddItemModalState(true))}
           >
             Add a New Item
           </Button>
@@ -70,10 +73,7 @@ function Inventory() {
           <Table dataSource={dataSource} columns={columns} />
         </Col>
       </Row>
-      <AddItemModal
-        visible={addItemDialogState}
-        closeModal={() => setAddItemDialogState(false)}
-      />
+      <AddItemModal />
     </>
   );
 }
