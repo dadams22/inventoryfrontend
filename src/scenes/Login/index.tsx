@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col, Typography } from 'antd';
 import { login } from '../../services/user';
 import { ApplicationState } from '../../store';
 
@@ -17,6 +17,7 @@ function Login() {
   ) : (
     <Row align='middle' justify='center' style={{ minHeight: '100vh' }}>
       <Col span={6}>
+        <Typography.Title level={2}>Login to reINVENTory</Typography.Title>
         <Form
           name='basic'
           initialValues={{ remember: true }}
