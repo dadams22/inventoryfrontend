@@ -1,4 +1,5 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { message } from 'antd';
 import apiInstance from '../utils/api';
 
 export interface InventoryItem {
@@ -54,6 +55,7 @@ export const itemsSlice = createSlice({
     });
     builder.addCase(createItem.fulfilled, (state, action) => {
       const newItem = action.payload as InventoryItem;
+      message.success(`Item '${newItem.name}' successfully created`);
       return {
         ...state,
         items: [...state.items, newItem],
