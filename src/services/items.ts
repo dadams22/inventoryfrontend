@@ -22,6 +22,14 @@ export const fetchItems = createAsyncThunk('FETCH_ITEMS', async () => {
   return apiInstance.fetchItems();
 });
 
+export const createItem = createAsyncThunk(
+  'CREATE_ITEM',
+  async (payload: Object) => {
+    // @ts-ignore
+    return apiInstance.createItem(payload);
+  },
+);
+
 export const itemsSlice = createSlice({
   name: 'items',
   initialState,

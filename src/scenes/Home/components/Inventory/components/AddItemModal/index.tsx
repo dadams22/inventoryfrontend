@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Steps, Button, Form, Modal } from 'antd';
 import { FormInstance } from 'antd/es/form';
 import ItemInfo from './components/ItemInfo';
 import LinkScales from './components/LinkScales';
 import ReviewInfo from './components/ReviewInfo';
 import { FormData } from './types';
+import { createItem } from '../../../../../../services/items';
 
 const { Step } = Steps;
 
@@ -14,6 +16,7 @@ interface Props {
 }
 
 const AddItemModal = ({ visible, closeModal }: Props) => {
+  const dispatch = useDispatch();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -74,6 +77,7 @@ const AddItemModal = ({ visible, closeModal }: Props) => {
           ...values,
         });
         setCurrentStep(currentStep + 1);
+        dispatch(createItem(formData));
       }}
     >
       <Modal
