@@ -12,6 +12,7 @@ import {
   InventoryItem,
   setAddItemModalState,
 } from '../../../../services/items';
+import { fetchScales } from '../../../../services/scales';
 
 function Inventory() {
   const items = useSelector((state: ApplicationState) => state.items.items);
@@ -73,7 +74,11 @@ function Inventory() {
             type='primary'
             icon={<PlusOutlined />}
             style={{ float: 'right' }}
-            onClick={() => dispatch(setAddItemModalState(true))}
+            onClick={() => {
+              dispatch(setAddItemModalState(true));
+              // TODO: move this somewhere else, probably to an epic
+              dispatch(fetchScales());
+            }}
           >
             Add a New Item
           </Button>
