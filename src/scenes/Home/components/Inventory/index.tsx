@@ -46,6 +46,7 @@ function Inventory() {
       key: 'created_at',
       sorter: (a: InventoryItem, b: InventoryItem) =>
         a.created_at.localeCompare(b.created_at),
+      render: (created_at: string) => created_at.slice(0, 10),
     },
     {
       title: 'Weight (lbs.)',
