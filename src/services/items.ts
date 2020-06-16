@@ -6,7 +6,7 @@ export interface InventoryItem {
   name: string;
   description: string;
   weight: number;
-  // created_at: any;
+  created_at: string;
   site: number;
 }
 
@@ -21,14 +21,18 @@ const initialState: ItemsState = {
 };
 
 export const fetchItems = createAsyncThunk('FETCH_ITEMS', async () => {
-  return apiInstance.fetchItems();
+  const data = await apiInstance.fetchItems();
+  data.forEach((item: InventoryItem) => item.weight = (Math.random() * 20));
+  return data;
 });
 
 export const createItem = createAsyncThunk(
   'CREATE_ITEM',
   async (payload: Object) => {
     // @ts-ignore
-    return apiInstance.createItem(payload);
+    const data = await apiInstance.createItem(payload);
+    data.weight = (Math.random() * 20).toFixed(2);
+    return data;
   },
 );
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Row, Table } from 'antd';
+import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../../../components/SearchBar';
@@ -30,7 +31,7 @@ function Inventory() {
     )
     .map((item) => ({ ...item, key: item.id }));
 
-  const columns = [
+  const columns: ColumnProps<any>[] = [
     {
       title: 'Name',
       dataIndex: 'name',
@@ -40,10 +41,19 @@ function Inventory() {
       render: (name: string) => <Link to='/inventory'>{name}</Link>,
     },
     {
+      title: 'Date Stocked',
+      dataIndex: 'created_at',
+      key: 'created_at',
+      sorter: (a: InventoryItem, b: InventoryItem) =>
+        a.created_at.localeCompare(b.created_at),
+    },
+    {
       title: 'Weight (lbs.)',
       dataIndex: 'weight',
       key: 'weight',
+      align: 'right',
       sorter: (a: InventoryItem, b: InventoryItem) => a.weight - b.weight,
+      render: (weight: number) => weight.toFixed(2),
     },
   ];
 
