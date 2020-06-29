@@ -1,6 +1,6 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import { Layout } from 'antd';
+import { Redirect, Route, Switch, Link } from 'react-router-dom';
+import { Layout, Typography } from 'antd';
 import { useSelector } from 'react-redux';
 import NavigationBar from '../../components/NavigationBar';
 import Inventory from './components/Inventory';
@@ -25,7 +25,8 @@ function Home() {
         </Switch>
       </Layout.Content>
       <Layout.Footer style={{ textAlign: 'center' }}>
-        Visit <a href='http://www.reinventory.info'>reinventory.info</a>
+        <Typography.Text>Visit </Typography.Text>
+        <Link to='http://www.reinventory.info'>reinventory.info</Link>
       </Layout.Footer>
     </>
   );
