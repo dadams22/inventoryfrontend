@@ -12,18 +12,29 @@ class ApiWrapper {
 
   instance: ReturnType<typeof axios.create>;
 
-  setTokenAuth(token: string) {
+  private static getTokenFromStorage() {
+    return localStorage.getItem('token');
+  }
+
+  private static putTokenInStorage(token: string) {
     localStorage.setItem('token', token);
+  }
+
+  private static removeTokenFromStorage() {
+    localStorage.removeItem('token');
+  }
+
+  setTokenAuth(token: string) {
     this.instance.defaults.headers.common.Authorization = `JWT ${token}`;
   }
 
   removeTokenAuth() {
-    localStorage.removeItem('token');
+    ApiWrapper.removeTokenFromStorage();
     this.instance.defaults.headers.common.Authorization = undefined;
   }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
+    const token = ApiWrapper.getTokenFromStorage();
     if (token !== null) {
       this.setTokenAuth(token);
       return true;
@@ -43,6 +54,7 @@ class ApiWrapper {
       payload,
     );
     const { token } = response.data;
+    ApiWrapper.putTokenInStorage(token);
     this.setTokenAuth(token);
   }
 
