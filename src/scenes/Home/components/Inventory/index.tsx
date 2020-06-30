@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 import { Button, Col, Row, Table, Tag } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
@@ -53,15 +54,23 @@ function Inventory() {
       title: 'Linked Scales',
       dataIndex: 'scales',
       key: 'scales',
-      render: (scales: number[]) => scales.map((scale) => <Tag>{scale}</Tag>),
+      render: (scales: number[]) =>
+        scales.map((scale) => <Tag key={scale}>{scale}</Tag>),
     },
     {
       title: 'Weight (lbs.)',
-      dataIndex: 'weight',
-      key: 'weight',
+      dataIndex: 'last_measurement',
+      key: 'last_measurement',
       align: 'right',
-      sorter: (a: InventoryItem, b: InventoryItem) => a.weight - b.weight,
-      render: (weight: number) => weight.toFixed(2),
+      sorter: (a: InventoryItem, b: InventoryItem) => {
+        const weightA = _.get(a, 'last_measurement.value', -1);
+        const weightB = _.get(b, 'last_measurement.value', -1);
+        return weightA - weightB;
+      },
+      render: (measurement?: { value: number; timestamp: string }) => {
+        const value = _.get(measurement, 'value');
+        return value ? value.toFixed(2) : '';
+      },
     },
   ];
 

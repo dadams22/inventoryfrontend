@@ -10,6 +10,10 @@ export interface InventoryItem {
   created_at: string;
   site: number;
   scales: number[];
+  last_measurement?: {
+    value: number;
+    timestamp: string;
+  };
 }
 
 export interface ItemsState {
@@ -24,7 +28,6 @@ const initialState: ItemsState = {
 
 export const fetchItems = createAsyncThunk('FETCH_ITEMS', async () => {
   const data = await apiInstance.fetchItems();
-  data.forEach((item: InventoryItem) => (item.weight = Math.random() * 20));
   return data;
 });
 
@@ -33,7 +36,6 @@ export const createItem = createAsyncThunk(
   async (payload: Object) => {
     // @ts-ignore
     const data = await apiInstance.createItem(payload);
-    data.weight = Math.random() * 20;
     return data;
   },
 );
