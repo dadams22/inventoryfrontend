@@ -1,24 +1,22 @@
 import React from 'react';
-import { Button } from 'antd';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import { Layout } from 'antd';
+import Login from './scenes/Login';
+
+import Home from './scenes/Home';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button>Hello</Button>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Router>
+        <Layout>
+          <Switch>
+            <Route path='/login' component={Login} />
+            <Route path='/' component={Home} />
+          </Switch>
+        </Layout>
+      </Router>
     </div>
   );
 }
