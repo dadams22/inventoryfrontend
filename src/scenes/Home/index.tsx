@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route, Switch, Link } from 'react-router-dom';
 import { Layout, Typography } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NavigationBar from '../../components/NavigationBar';
 import Inventory from './components/Inventory';
 import Scales from './components/Scales';
 import { ApplicationState } from '../../store';
+import { fetchItems } from '../../services/items';
+import { fetchScales } from '../../services/scales';
 
 function Home() {
+  const dispatch = useDispatch();
   const authenticated = useSelector(
     (state: ApplicationState) => state.user.authenticated,
   );
+
+  // Fetch data from backend on first successful authentication
+  useEffect(() => {
+    if (authenticated) {
+      dispatch(fetchItems());
+      dispatch(fetchScales());
+    }
+  }, [authenticated]);
 
   return !authenticated ? (
     <Redirect to='/login' />

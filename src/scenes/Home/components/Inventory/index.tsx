@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { Button, Col, Row, Table, Tag } from 'antd';
@@ -9,24 +9,17 @@ import SearchBar from '../../../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../store';
 import {
-  fetchItems,
   InventoryItem,
   setAddItemModalState,
 } from '../../../../services/items';
 import { fetchScales } from '../../../../services/scales';
 
 function Inventory() {
+  const dispatch = useDispatch();
   const items = useSelector((state: ApplicationState) => state.items.items);
   const fetching = useSelector(
     (state: ApplicationState) => state.items.fetching,
   );
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (items.length === 0) {
-      dispatch(fetchItems());
-    }
-  });
 
   const [searchValue, setSearchValue] = useState('');
 

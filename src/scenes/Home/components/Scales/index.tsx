@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Col, Row, Table, Tag } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SearchBar from '../../../../components/SearchBar';
 import { ApplicationState } from '../../../../store';
-import { fetchScales, Scale } from '../../../../services/scales';
+import { Scale } from '../../../../services/scales';
 
 function Scales() {
   const scales = useSelector((state: ApplicationState) => state.scales.scales);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (scales.length === 0) {
-      dispatch(fetchScales());
-    }
-  });
 
   const [searchValue, setSearchValue] = useState('');
 
