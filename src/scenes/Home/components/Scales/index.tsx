@@ -32,9 +32,12 @@ function Scales() {
     },
   ];
 
+  // TODO: refactor this and the items scene to use the same code for this
+  const spacedRowStyle = { marginTop: '10px' };
+
   return (
     <>
-      <Row>
+      <Row style={spacedRowStyle}>
         <Col span={4} offset={3}>
           <SearchBar
             searchValue={searchValue}
@@ -43,7 +46,7 @@ function Scales() {
           />
         </Col>
       </Row>
-      <Row justify='center'>
+      <Row justify='center' style={spacedRowStyle}>
         <Col span={18}>
           <Table dataSource={dataSource} columns={columns} />
         </Col>
