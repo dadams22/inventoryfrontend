@@ -80,6 +80,9 @@ export const itemsSlice = createSlice({
         addItemModalState: false,
       };
     });
+    builder.addCase(createItem.rejected, () => {
+      message.error('Item creation failed');
+    });
     builder.addCase(setAddItemModalState, (state, action) => {
       return {
         ...state,
