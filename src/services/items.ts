@@ -65,6 +65,12 @@ export const itemsSlice = createSlice({
         fetching: false,
       };
     });
+    builder.addCase(fetchItems.rejected, (state) => {
+      return {
+        ...state,
+        fetching: false,
+      };
+    });
     builder.addCase(createItem.fulfilled, (state, action) => {
       const newItem = action.payload as InventoryItem;
       message.success(`Item '${newItem.name}' successfully created`);
