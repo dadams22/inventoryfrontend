@@ -17,6 +17,9 @@ import { fetchScales } from '../../../../services/scales';
 
 function Inventory() {
   const items = useSelector((state: ApplicationState) => state.items.items);
+  const fetching = useSelector(
+    (state: ApplicationState) => state.items.fetching,
+  );
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -101,7 +104,7 @@ function Inventory() {
       </Row>
       <Row justify='center'>
         <Col span={18}>
-          <Table dataSource={dataSource} columns={columns} />
+          <Table dataSource={dataSource} columns={columns} loading={fetching} />
         </Col>
       </Row>
       <AddItemModal />
