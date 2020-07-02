@@ -19,11 +19,13 @@ export interface InventoryItem {
 export interface ItemsState {
   items: InventoryItem[];
   addItemModalState: boolean;
+  fetching: boolean;
 }
 
 const initialState: ItemsState = {
   items: [],
   addItemModalState: false,
+  fetching: false,
 };
 
 export const fetchItems = createAsyncThunk('FETCH_ITEMS', async () => {
@@ -49,11 +51,18 @@ export const itemsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(fetchItems.pending, (state) => {
+      return {
+        ...state,
+        fetching: true,
+      };
+    });
     builder.addCase(fetchItems.fulfilled, (state, action) => {
       const items = action.payload;
       return {
         ...state,
         items,
+        fetching: false,
       };
     });
     builder.addCase(createItem.fulfilled, (state, action) => {
