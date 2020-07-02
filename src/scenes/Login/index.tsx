@@ -23,7 +23,6 @@ function Login() {
           initialValues={{ remember: true }}
           onFinish={(values) => {
             // TODO: fix onFinish and typing
-            console.log(values);
             // @ts-ignore
             dispatch(login(values));
           }}
