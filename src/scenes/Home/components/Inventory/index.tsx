@@ -77,9 +77,12 @@ function Inventory() {
     },
   ];
 
+  // TODO: change this to something application-wide
+  const spacedRowStyle = { marginTop: '10px' };
+
   return (
     <>
-      <Row>
+      <Row style={spacedRowStyle}>
         <Col span={4} offset={3}>
           <SearchBar
             searchValue={searchValue}
@@ -102,7 +105,7 @@ function Inventory() {
           </Button>
         </Col>
       </Row>
-      <Row justify='center'>
+      <Row justify='center' style={spacedRowStyle}>
         <Col span={18}>
           <Table dataSource={dataSource} columns={columns} loading={fetching} />
         </Col>
