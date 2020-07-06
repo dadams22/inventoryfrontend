@@ -81,7 +81,7 @@ export const itemsSlice = createSlice({
       };
     });
     builder.addCase(createItem.rejected, () => {
-      message.error('Item creation failed');
+      message.error('Error: Item creation failed');
     });
     builder.addCase(setAddItemModalState, (state, action) => {
       return {
