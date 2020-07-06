@@ -13,10 +13,11 @@ import {
   setAddItemModalState,
 } from '../../../../services/items';
 import { fetchScales } from '../../../../services/scales';
+import { itemsSelectors } from '../../../../services/selectors';
 
 function Inventory() {
   const dispatch = useDispatch();
-  const items = useSelector((state: ApplicationState) => state.items.items);
+  const items = useSelector(itemsSelectors.selectAll);
   const fetching = useSelector(
     (state: ApplicationState) => state.items.fetching,
   );

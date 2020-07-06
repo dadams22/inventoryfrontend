@@ -1,4 +1,11 @@
-import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+/* eslint-disable no-param-reassign */
+import {
+  createAction,
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+  EntityState,
+} from '@reduxjs/toolkit';
 import { message } from 'antd';
 import apiInstance from '../utils/api';
 
@@ -17,13 +24,15 @@ export interface InventoryItem {
 }
 
 export interface ItemsState {
-  items: InventoryItem[];
+  items: EntityState<InventoryItem>;
   addItemModalState: boolean;
   fetching: boolean;
 }
 
+export const itemsAdapter = createEntityAdapter<InventoryItem>();
+
 const initialState: ItemsState = {
-  items: [],
+  items: itemsAdapter.getInitialState(),
   addItemModalState: false,
   fetching: false,
 };
@@ -53,42 +62,27 @@ export const itemsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchItems.pending, (state) => {
-      return {
-        ...state,
-        fetching: true,
-      };
+      state.fetching = true;
     });
     builder.addCase(fetchItems.fulfilled, (state, action) => {
       const items = action.payload;
-      return {
-        ...state,
-        items,
-        fetching: false,
-      };
+      itemsAdapter.upsertMany(state.items, items);
+      state.fetching = false;
     });
     builder.addCase(fetchItems.rejected, (state) => {
-      return {
-        ...state,
-        fetching: false,
-      };
+      state.fetching = false;
     });
     builder.addCase(createItem.fulfilled, (state, action) => {
       const newItem = action.payload as InventoryItem;
+      itemsAdapter.addOne(state.items, newItem);
       message.success(`Item '${newItem.name}' successfully created`);
-      return {
-        ...state,
-        items: [...state.items, newItem],
-        addItemModalState: false,
-      };
+      state.addItemModalState = false;
     });
     builder.addCase(createItem.rejected, () => {
       message.error('Error: Item creation failed');
     });
     builder.addCase(setAddItemModalState, (state, action) => {
-      return {
-        ...state,
-        addItemModalState: action.payload,
-      };
+      state.addItemModalState = action.payload;
     });
   },
 });

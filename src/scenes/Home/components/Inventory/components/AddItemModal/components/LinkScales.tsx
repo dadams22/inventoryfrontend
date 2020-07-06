@@ -2,14 +2,14 @@ import React from 'react';
 import { Form, Select } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { useSelector } from 'react-redux';
-import { ApplicationState } from '../../../../../../../store';
+import { scalesSelectors } from '../../../../../../../services/selectors';
 
 interface Props {
   form: FormInstance;
 }
 
 const LinkScales = ({ form }: Props) => {
-  const scales = useSelector((state: ApplicationState) => state.scales.scales);
+  const scales = useSelector(scalesSelectors.selectAll);
   const availableScales = scales.filter((scale) => scale.item === null);
 
   return (
