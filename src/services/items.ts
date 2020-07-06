@@ -36,6 +36,7 @@ export const fetchItems = createAsyncThunk('FETCH_ITEMS', async () => {
 export const createItem = createAsyncThunk(
   'CREATE_ITEM',
   async (payload: Object) => {
+    // TODO: fix typing here
     // @ts-ignore
     const data = await apiInstance.createItem(payload);
     return data;
