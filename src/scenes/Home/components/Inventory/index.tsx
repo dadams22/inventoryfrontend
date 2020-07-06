@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { Button, Col, Row, Table, Tag } from 'antd';
+import { Button, Col, Row, Table, Tag, Dropdown, Menu } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, MoreOutlined } from '@ant-design/icons';
 import SearchBar from '../../../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../store';
@@ -14,6 +14,7 @@ import {
 } from '../../../../services/items';
 import { fetchScales } from '../../../../services/scales';
 import { itemsSelectors } from '../../../../services/selectors';
+import { EllipsisOutlined } from '@ant-design/icons/lib';
 
 function Inventory() {
   const dispatch = useDispatch();
@@ -69,6 +70,22 @@ function Inventory() {
         return value ? value.toFixed(2) : '';
       },
     },
+    {
+      key: 'actions',
+      render: (item: InventoryItem) => {
+        const actions = (
+          <Menu>
+            <Menu.Item>Delete Item</Menu.Item>
+          </Menu>
+        );
+        return (
+          <Dropdown overlay={actions}>
+            <EllipsisOutlined />
+          </Dropdown>
+        );
+      }
+
+    }
   ];
 
   // TODO: change this to something application-wide
