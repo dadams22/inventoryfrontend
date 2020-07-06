@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Col, Row, Table, Tag } from 'antd';
 import { useSelector } from 'react-redux';
 import SearchBar from '../../../../components/SearchBar';
-import { ApplicationState } from '../../../../store';
 import { Scale } from '../../../../services/scales';
+import { scalesSelectors } from '../../../../services/selectors';
 
 function Scales() {
-  const scales = useSelector((state: ApplicationState) => state.scales.scales);
+  const scales = useSelector(scalesSelectors.selectAll);
 
   const [searchValue, setSearchValue] = useState('');
 

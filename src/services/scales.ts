@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+  EntityState,
+} from '@reduxjs/toolkit';
 import apiInstance from '../utils/api';
 
 export interface Scale {
@@ -9,11 +14,13 @@ export interface Scale {
 }
 
 export interface ScalesState {
-  scales: Scale[];
+  scales: EntityState<Scale>;
 }
 
+export const scalesAdapter = createEntityAdapter<Scale>();
+
 const initialState: ScalesState = {
-  scales: [],
+  scales: scalesAdapter.getInitialState(),
 };
 
 export const fetchScales = createAsyncThunk('FETCH_SCALES', async () => {
@@ -26,10 +33,7 @@ export const scalesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchScales.fulfilled, (state, action) => {
-      return {
-        ...state,
-        scales: action.payload,
-      };
+      scalesAdapter.upsertMany(state.scales, action.payload);
     });
   },
 });

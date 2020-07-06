@@ -1,8 +1,13 @@
 /* eslint-disable no-param-reassign */
-import { createAction, createAsyncThunk, createEntityAdapter, createSlice, EntityState } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+  EntityState,
+} from '@reduxjs/toolkit';
 import { message } from 'antd';
 import apiInstance from '../utils/api';
-import { ApplicationState } from '../store';
 
 export interface InventoryItem {
   id: number;
@@ -71,7 +76,7 @@ export const itemsSlice = createSlice({
       const newItem = action.payload as InventoryItem;
       itemsAdapter.addOne(state.items, newItem);
       message.success(`Item '${newItem.name}' successfully created`);
-      state.addItemModalState = false
+      state.addItemModalState = false;
     });
     builder.addCase(createItem.rejected, () => {
       message.error('Error: Item creation failed');
