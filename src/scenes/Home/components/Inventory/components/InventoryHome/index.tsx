@@ -87,6 +87,9 @@ function InventoryHome() {
       render: (item: InventoryItem) => {
         const actions = (
           <Menu>
+            <Menu.Item>
+              <Link to={`/inventory/${item.id}`}>View Details</Link>
+            </Menu.Item>
             <Menu.Item onClick={() => renderDeleteItemConfirm(item)}>
               Delete Item
             </Menu.Item>
