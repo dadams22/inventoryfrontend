@@ -18,7 +18,7 @@ const ItemDetails = () => {
     );
   }
 
-  return <PageHeader title={item.name} />;
+  return <PageHeader title={item.name} subTitle={item.description} />;
 };
 
 export default ItemDetails;
