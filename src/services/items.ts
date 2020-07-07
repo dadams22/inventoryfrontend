@@ -56,8 +56,6 @@ export const setAddItemModalState = createAction<boolean>(
   'SET_ADD_ITEM_MODAL_STATE',
 );
 
-export const setDeleteItemModalState = createAction;
-
 export const itemsSlice = createSlice({
   name: 'items',
   initialState,
