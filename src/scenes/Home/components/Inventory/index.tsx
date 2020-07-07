@@ -81,6 +81,7 @@ function Inventory() {
     },
     {
       key: 'actions',
+      align: 'right',
       render: (item: InventoryItem) => {
         const actions = (
           <Menu>
