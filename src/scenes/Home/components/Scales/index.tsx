@@ -37,7 +37,7 @@ function Scales() {
 
   return (
     <>
-      <Row style={spacedRowStyle}>
+      <Row>
         <Col span={4} offset={3}>
           <SearchBar
             searchValue={searchValue}
