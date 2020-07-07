@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps, useParams, withRouter } from 'react-router-dom';
-import { Empty, PageHeader } from 'antd';
+import { Descriptions, Empty, PageHeader } from 'antd';
 import { useSelector } from 'react-redux';
 import { itemsSelectors } from '../../../../../../services/selectors';
 import { ApplicationState } from '../../../../../../store';
@@ -23,7 +23,15 @@ const ItemDetails = ({ history }: RouteComponentProps) => {
       title={item.name}
       onBack={() => history.push('/inventory')}
       ghost={false}
-    />
+    >
+      <Descriptions>
+        {item.description && (
+          <Descriptions.Item label='Description'>
+            {item.description}
+          </Descriptions.Item>
+        )}
+      </Descriptions>
+    </PageHeader>
   );
 };
 
