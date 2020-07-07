@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { Button, Col, Row, Table, Tag } from 'antd';
+import { Button, Col, Row, Table, Tag, Dropdown, Menu, Modal } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
-import { PlusOutlined } from '@ant-design/icons';
+import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../store';
 import {
+  deleteItem,
   InventoryItem,
   setAddItemModalState,
 } from '../../../../services/items';
@@ -29,6 +30,15 @@ function Inventory() {
       item.name.toLowerCase().includes(searchValue.toLowerCase()),
     )
     .map((item) => ({ ...item, key: item.id }));
+
+  const renderDeleteItemConfirm = (item: InventoryItem) =>
+    Modal.confirm({
+      title: `Are you sure you want to delete ${item.name}?`,
+      content:
+        'Deleting an item causes all data collected for that item to be permanently deleted',
+      okText: 'Delete',
+      onOk: () => dispatch(deleteItem(item.id)),
+    });
 
   const columns: ColumnProps<any>[] = [
     {
@@ -67,6 +77,24 @@ function Inventory() {
       render: (measurement?: { value: number; timestamp: string }) => {
         const value = _.get(measurement, 'value');
         return value ? value.toFixed(2) : '';
+      },
+    },
+    {
+      key: 'actions',
+      align: 'right',
+      render: (item: InventoryItem) => {
+        const actions = (
+          <Menu>
+            <Menu.Item onClick={() => renderDeleteItemConfirm(item)}>
+              Delete Item
+            </Menu.Item>
+          </Menu>
+        );
+        return (
+          <Dropdown overlay={actions}>
+            <EllipsisOutlined />
+          </Dropdown>
+        );
       },
     },
   ];

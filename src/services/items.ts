@@ -52,6 +52,14 @@ export const createItem = createAsyncThunk(
   },
 );
 
+export const deleteItem = createAsyncThunk(
+  'DELETE_ITEM',
+  async (id: number) => {
+    const data = await apiInstance.deleteItem(id);
+    return data;
+  },
+);
+
 export const setAddItemModalState = createAction<boolean>(
   'SET_ADD_ITEM_MODAL_STATE',
 );
@@ -80,6 +88,14 @@ export const itemsSlice = createSlice({
     });
     builder.addCase(createItem.rejected, () => {
       message.error('Error: Item creation failed');
+    });
+    builder.addCase(deleteItem.fulfilled, (state, action) => {
+      const deletedItemId = action.meta.arg;
+      itemsAdapter.removeOne(state.items, deletedItemId);
+      message.success('Item successfully deleted');
+    });
+    builder.addCase(deleteItem.rejected, () => {
+      message.error('Item deletion failed');
     });
     builder.addCase(setAddItemModalState, (state, action) => {
       state.addItemModalState = action.payload;
