@@ -19,11 +19,7 @@ const ItemDetails = ({ history }: RouteComponentProps) => {
   }
 
   return (
-    <PageHeader
-      title={item.name}
-      subTitle={item.description}
-      onBack={() => history.push('/inventory')}
-    />
+    <PageHeader title={item.name} onBack={() => history.push('/inventory')} />
   );
 };
 
