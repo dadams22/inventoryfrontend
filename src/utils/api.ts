@@ -46,6 +46,7 @@ class ApiWrapper {
     this.instance = axios.create({
       baseURL: this.API_BASE_URL,
     });
+    this.isAuthenticated();
   }
 
   async login(payload: { username: string; password: string }) {
