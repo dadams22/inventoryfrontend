@@ -9,6 +9,7 @@ import SearchBar from '../../../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../store';
 import {
+  deleteItem,
   InventoryItem,
   setAddItemModalState,
 } from '../../../../services/items';
@@ -31,11 +32,12 @@ function Inventory() {
     .map((item) => ({ ...item, key: item.id }));
 
   const renderDeleteItemConfirm = (item: InventoryItem) =>
-    Modal.warning({
+    Modal.confirm({
       title: `Are you sure you want to delete ${item.name}?`,
       content:
         'Deleting an item causes all data collected for that item to be permanently deleted',
       okText: 'Delete',
+      onOk: () => dispatch(deleteItem(item.id)),
     });
 
   const columns: ColumnProps<any>[] = [
