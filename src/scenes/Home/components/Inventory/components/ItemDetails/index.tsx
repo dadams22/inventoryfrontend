@@ -21,6 +21,7 @@ const ItemDetails = ({ history }: RouteComponentProps) => {
   return (
     <PageHeader
       title={item.name}
+      subTitle='Item Details'
       onBack={() => history.push('/inventory')}
       ghost={false}
     >
