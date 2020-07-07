@@ -5,18 +5,18 @@ import { Button, Col, Row, Table, Tag, Dropdown, Menu, Modal } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
-import SearchBar from '../../../../components/SearchBar';
-import AddItemModal from './components/AddItemModal';
-import { ApplicationState } from '../../../../store';
+import SearchBar from '../../../../../../components/SearchBar';
+import AddItemModal from '../AddItemModal';
+import { ApplicationState } from '../../../../../../store';
 import {
   deleteItem,
   InventoryItem,
   setAddItemModalState,
-} from '../../../../services/items';
-import { fetchScales } from '../../../../services/scales';
-import { itemsSelectors } from '../../../../services/selectors';
+} from '../../../../../../services/items';
+import { fetchScales } from '../../../../../../services/scales';
+import { itemsSelectors } from '../../../../../../services/selectors';
 
-function Inventory() {
+function InventoryHome() {
   const dispatch = useDispatch();
   const items = useSelector(itemsSelectors.selectAll);
   const fetching = useSelector(
@@ -137,4 +137,4 @@ function Inventory() {
   );
 }
 
-export default Inventory;
+export default InventoryHome;

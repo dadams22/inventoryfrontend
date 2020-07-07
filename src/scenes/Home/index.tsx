@@ -3,11 +3,11 @@ import { Redirect, Route, Switch, Link } from 'react-router-dom';
 import { Layout, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import NavigationBar from '../../components/NavigationBar';
-import Inventory from './components/Inventory';
 import Scales from './components/Scales';
 import { ApplicationState } from '../../store';
 import { fetchItems } from '../../services/items';
 import { fetchScales } from '../../services/scales';
+import Inventory from './components/Inventory/components';
 
 function Home() {
   const dispatch = useDispatch();
