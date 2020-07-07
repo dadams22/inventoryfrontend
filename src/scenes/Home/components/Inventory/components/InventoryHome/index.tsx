@@ -47,7 +47,9 @@ function InventoryHome() {
       key: 'name',
       sorter: (a: InventoryItem, b: InventoryItem) =>
         a.name.localeCompare(b.name),
-      render: (name: string) => <Link to='/inventory'>{name}</Link>,
+      render: (name: string, item: InventoryItem) => (
+        <Link to={`/inventory/${item.id}`}>{name}</Link>
+      ),
     },
     {
       title: 'Date Stocked',
