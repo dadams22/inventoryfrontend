@@ -13,7 +13,6 @@ export interface InventoryItem {
   id: number;
   name: string;
   description?: string;
-  weight: number;
   created_at: string;
   site: number;
   scales: number[];
