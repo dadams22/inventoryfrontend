@@ -1,6 +1,14 @@
 import React from 'react';
 import { RouteComponentProps, useParams, withRouter } from 'react-router-dom';
-import { Col, Descriptions, Empty, PageHeader, Row, Tag } from 'antd';
+import {
+  Col,
+  Descriptions,
+  Empty,
+  PageHeader,
+  Row,
+  Statistic,
+  Tag,
+} from 'antd';
 import { useSelector } from 'react-redux';
 import { itemsSelectors } from '../../../../../../services/selectors';
 import { ApplicationState } from '../../../../../../store';
@@ -42,6 +50,14 @@ const ItemDetails = ({ history }: RouteComponentProps) => {
               ))}
             </Descriptions.Item>
           </Descriptions>
+          {item.last_measurement && (
+            <Statistic
+              title='Current Weight'
+              value={item.last_measurement.value}
+              precision={2}
+              suffix='lbs.'
+            />
+          )}
         </PageHeader>
       </Col>
     </Row>
