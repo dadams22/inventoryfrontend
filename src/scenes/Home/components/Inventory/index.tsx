@@ -1,29 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { Button, Col, Row, Table, Tag } from 'antd';
+import { Button, Col, Row, Table, Tag, Dropdown, Menu, Modal } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
-import { PlusOutlined } from '@ant-design/icons';
+import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../store';
 import {
-  fetchItems,
+  deleteItem,
   InventoryItem,
   setAddItemModalState,
 } from '../../../../services/items';
 import { fetchScales } from '../../../../services/scales';
+import { itemsSelectors } from '../../../../services/selectors';
 
 function Inventory() {
-  const items = useSelector((state: ApplicationState) => state.items.items);
-
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (items.length === 0) {
-      dispatch(fetchItems());
-    }
-  });
+  const items = useSelector(itemsSelectors.selectAll);
+  const fetching = useSelector(
+    (state: ApplicationState) => state.items.fetching,
+  );
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -32,6 +30,15 @@ function Inventory() {
       item.name.toLowerCase().includes(searchValue.toLowerCase()),
     )
     .map((item) => ({ ...item, key: item.id }));
+
+  const renderDeleteItemConfirm = (item: InventoryItem) =>
+    Modal.confirm({
+      title: `Are you sure you want to delete ${item.name}?`,
+      content:
+        'Deleting an item causes all data collected for that item to be permanently deleted',
+      okText: 'Delete',
+      onOk: () => dispatch(deleteItem(item.id)),
+    });
 
   const columns: ColumnProps<any>[] = [
     {
@@ -72,11 +79,32 @@ function Inventory() {
         return value ? value.toFixed(2) : '';
       },
     },
+    {
+      key: 'actions',
+      align: 'right',
+      render: (item: InventoryItem) => {
+        const actions = (
+          <Menu>
+            <Menu.Item onClick={() => renderDeleteItemConfirm(item)}>
+              Delete Item
+            </Menu.Item>
+          </Menu>
+        );
+        return (
+          <Dropdown overlay={actions}>
+            <EllipsisOutlined />
+          </Dropdown>
+        );
+      },
+    },
   ];
+
+  // TODO: change this to something application-wide
+  const spacedRowStyle = { marginTop: '10px' };
 
   return (
     <>
-      <Row>
+      <Row style={spacedRowStyle}>
         <Col span={4} offset={3}>
           <SearchBar
             searchValue={searchValue}
@@ -99,9 +127,9 @@ function Inventory() {
           </Button>
         </Col>
       </Row>
-      <Row justify='center'>
+      <Row justify='center' style={spacedRowStyle}>
         <Col span={18}>
-          <Table dataSource={dataSource} columns={columns} />
+          <Table dataSource={dataSource} columns={columns} loading={fetching} />
         </Col>
       </Row>
       <AddItemModal />

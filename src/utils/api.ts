@@ -5,7 +5,7 @@ class ApiWrapper {
 
   ENDPOINTS = {
     getItems: 'items',
-    createItem: 'items/',
+    modifyItem: 'items/',
     scales: 'scales',
     tokenAuth: 'token-auth',
   };
@@ -75,9 +75,15 @@ class ApiWrapper {
     scales: number[];
   }) {
     const response = await this.instance.post(
-      this.ENDPOINTS.createItem,
+      this.ENDPOINTS.modifyItem,
       payload,
     );
+    return response.data;
+  }
+
+  async deleteItem(id: number) {
+    const url = this.ENDPOINTS.modifyItem + String(id);
+    const response = await this.instance.delete(url);
     return response.data;
   }
 }

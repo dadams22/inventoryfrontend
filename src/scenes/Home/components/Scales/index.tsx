@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Col, Row, Table, Tag } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SearchBar from '../../../../components/SearchBar';
-import { ApplicationState } from '../../../../store';
-import { fetchScales, Scale } from '../../../../services/scales';
+import { Scale } from '../../../../services/scales';
+import { scalesSelectors } from '../../../../services/selectors';
 
 function Scales() {
-  const scales = useSelector((state: ApplicationState) => state.scales.scales);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (scales.length === 0) {
-      dispatch(fetchScales());
-    }
-  });
+  const scales = useSelector(scalesSelectors.selectAll);
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -39,9 +32,12 @@ function Scales() {
     },
   ];
 
+  // TODO: refactor this and the items scene to use the same code for this
+  const spacedRowStyle = { marginTop: '10px' };
+
   return (
     <>
-      <Row>
+      <Row style={spacedRowStyle}>
         <Col span={4} offset={3}>
           <SearchBar
             searchValue={searchValue}
@@ -50,7 +46,7 @@ function Scales() {
           />
         </Col>
       </Row>
-      <Row justify='center'>
+      <Row justify='center' style={spacedRowStyle}>
         <Col span={18}>
           <Table dataSource={dataSource} columns={columns} />
         </Col>
