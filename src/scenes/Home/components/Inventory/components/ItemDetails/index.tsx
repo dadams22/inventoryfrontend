@@ -1,11 +1,11 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { RouteComponentProps, useParams, withRouter } from 'react-router-dom';
 import { Empty, PageHeader } from 'antd';
 import { useSelector } from 'react-redux';
 import { itemsSelectors } from '../../../../../../services/selectors';
 import { ApplicationState } from '../../../../../../store';
 
-const ItemDetails = () => {
+const ItemDetails = ({ history }: RouteComponentProps) => {
   let { itemId } = useParams();
   itemId = Number(itemId);
   const item = useSelector((state: ApplicationState) =>
@@ -18,7 +18,13 @@ const ItemDetails = () => {
     );
   }
 
-  return <PageHeader title={item.name} subTitle={item.description} />;
+  return (
+    <PageHeader
+      title={item.name}
+      subTitle={item.description}
+      onBack={() => history.push('/inventory')}
+    />
+  );
 };
 
-export default ItemDetails;
+export default withRouter(ItemDetails);
