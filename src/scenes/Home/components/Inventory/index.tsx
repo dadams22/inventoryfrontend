@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { Button, Col, Row, Table, Tag, Dropdown, Menu } from 'antd';
+import { Button, Col, Row, Table, Tag, Dropdown, Menu, Modal } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
-import { PlusOutlined, MoreOutlined } from '@ant-design/icons';
+import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../store';
@@ -14,7 +14,6 @@ import {
 } from '../../../../services/items';
 import { fetchScales } from '../../../../services/scales';
 import { itemsSelectors } from '../../../../services/selectors';
-import { EllipsisOutlined } from '@ant-design/icons/lib';
 
 function Inventory() {
   const dispatch = useDispatch();
@@ -30,6 +29,14 @@ function Inventory() {
       item.name.toLowerCase().includes(searchValue.toLowerCase()),
     )
     .map((item) => ({ ...item, key: item.id }));
+
+  const renderDeleteItemConfirm = (item: InventoryItem) =>
+    Modal.warning({
+      title: `Are you sure you want to delete ${item.name}?`,
+      content:
+        'Deleting an item causes all data collected for that item to be permanently deleted',
+      okText: 'Delete',
+    });
 
   const columns: ColumnProps<any>[] = [
     {
@@ -75,7 +82,9 @@ function Inventory() {
       render: (item: InventoryItem) => {
         const actions = (
           <Menu>
-            <Menu.Item>Delete Item</Menu.Item>
+            <Menu.Item onClick={() => renderDeleteItemConfirm(item)}>
+              Delete Item
+            </Menu.Item>
           </Menu>
         );
         return (
@@ -83,9 +92,8 @@ function Inventory() {
             <EllipsisOutlined />
           </Dropdown>
         );
-      }
-
-    }
+      },
+    },
   ];
 
   // TODO: change this to something application-wide
