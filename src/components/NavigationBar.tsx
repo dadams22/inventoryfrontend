@@ -22,6 +22,7 @@ const NavigationBar = ({ location }: RouteComponentProps) => {
         position: 'relative',
         display: 'flex',
         justifyContent: 'center',
+        marginBottom: '10px',
       }}
       mode='horizontal'
       selectedKeys={selectedKeys}

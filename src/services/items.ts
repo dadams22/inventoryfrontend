@@ -12,8 +12,7 @@ import apiInstance from '../utils/api';
 export interface InventoryItem {
   id: number;
   name: string;
-  description: string;
-  weight: number;
+  description?: string;
   created_at: string;
   site: number;
   scales: number[];

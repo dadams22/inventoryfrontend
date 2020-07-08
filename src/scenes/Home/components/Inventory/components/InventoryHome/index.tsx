@@ -5,18 +5,18 @@ import { Button, Col, Row, Table, Tag, Dropdown, Menu, Modal } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
-import SearchBar from '../../../../components/SearchBar';
-import AddItemModal from './components/AddItemModal';
-import { ApplicationState } from '../../../../store';
+import SearchBar from '../../../../../../components/SearchBar';
+import AddItemModal from '../AddItemModal';
+import { ApplicationState } from '../../../../../../store';
 import {
   deleteItem,
   InventoryItem,
   setAddItemModalState,
-} from '../../../../services/items';
-import { fetchScales } from '../../../../services/scales';
-import { itemsSelectors } from '../../../../services/selectors';
+} from '../../../../../../services/items';
+import { fetchScales } from '../../../../../../services/scales';
+import { itemsSelectors } from '../../../../../../services/selectors';
 
-function Inventory() {
+function InventoryHome() {
   const dispatch = useDispatch();
   const items = useSelector(itemsSelectors.selectAll);
   const fetching = useSelector(
@@ -47,7 +47,9 @@ function Inventory() {
       key: 'name',
       sorter: (a: InventoryItem, b: InventoryItem) =>
         a.name.localeCompare(b.name),
-      render: (name: string) => <Link to='/inventory'>{name}</Link>,
+      render: (name: string, item: InventoryItem) => (
+        <Link to={`/inventory/${item.id}`}>{name}</Link>
+      ),
     },
     {
       title: 'Date Stocked',
@@ -85,6 +87,9 @@ function Inventory() {
       render: (item: InventoryItem) => {
         const actions = (
           <Menu>
+            <Menu.Item>
+              <Link to={`/inventory/${item.id}`}>View Details</Link>
+            </Menu.Item>
             <Menu.Item onClick={() => renderDeleteItemConfirm(item)}>
               Delete Item
             </Menu.Item>
@@ -104,7 +109,7 @@ function Inventory() {
 
   return (
     <>
-      <Row style={spacedRowStyle}>
+      <Row>
         <Col span={4} offset={3}>
           <SearchBar
             searchValue={searchValue}
@@ -137,4 +142,4 @@ function Inventory() {
   );
 }
 
-export default Inventory;
+export default InventoryHome;
