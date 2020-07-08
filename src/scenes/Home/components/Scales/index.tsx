@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Col, Row, Table, Tag } from 'antd';
 import { useSelector } from 'react-redux';
+import { Col, Row, Table, Tag } from 'antd';
+import { ColumnProps } from 'antd/es/table';
 import SearchBar from '../../../../components/SearchBar';
 import { Scale } from '../../../../services/scales';
 import { scalesSelectors } from '../../../../services/selectors';
@@ -14,19 +15,18 @@ function Scales() {
     .filter((scale) => String(scale.id).includes(searchValue.toLowerCase()))
     .map((scale) => ({ ...scale, key: scale.id }));
 
-  const columns = [
+  const columns: ColumnProps<Scale>[] = [
     {
       title: 'Scale ID',
       dataIndex: 'id',
       key: 'id',
-      sorter: (a: Scale, b: Scale) => a.id - b.id,
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Availability',
       dataIndex: 'item',
       key: 'item',
-      sorter: (a: Scale, b: Scale) =>
-        Number(a.item !== null) - Number(b.item !== null),
+      sorter: (a, b) => Number(a.item !== null) - Number(b.item !== null),
       render: (item: number) =>
         item === null ? <Tag color='green'>Available</Tag> : <Tag>In Use</Tag>,
     },
