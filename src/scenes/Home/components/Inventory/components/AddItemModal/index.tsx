@@ -99,7 +99,7 @@ const AddItemModal = () => {
             <Step key={item.title} title={item.title} />
           ))}
         </Steps>
-        {steps[currentStep].content}
+        <div style={{ marginTop: '5px' }}>{steps[currentStep].content}</div>
       </Modal>
     </Form.Provider>
   );
