@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps, useParams, withRouter } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import {
   Col,
   Descriptions,
@@ -13,12 +13,14 @@ import { useSelector } from 'react-redux';
 import { itemsSelectors } from '../../../../../../services/selectors';
 import { ApplicationState } from '../../../../../../store';
 
-const ItemDetails = ({ history }: RouteComponentProps) => {
+const ItemDetails = () => {
   let { itemId } = useParams();
   itemId = Number(itemId);
   const item = useSelector((state: ApplicationState) =>
     itemsSelectors.selectById(state, itemId),
   );
+
+  const history = useHistory();
 
   if (!item) {
     return (
@@ -64,4 +66,4 @@ const ItemDetails = ({ history }: RouteComponentProps) => {
   );
 };
 
-export default withRouter(ItemDetails);
+export default ItemDetails;
