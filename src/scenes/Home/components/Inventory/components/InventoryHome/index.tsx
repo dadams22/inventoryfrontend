@@ -74,7 +74,7 @@ function InventoryHome() {
     },
     {
       key: 'actions',
-      align: 'right',
+      align: 'center',
       render: (item: InventoryItem) => {
         const actions = (
           <Menu>
