@@ -4,6 +4,7 @@ import {
   createSlice,
   EntityState,
 } from '@reduxjs/toolkit';
+import { message } from 'antd';
 import apiInstance from '../utils/api';
 
 export interface Scale {
@@ -34,6 +35,9 @@ export const scalesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchScales.fulfilled, (state, action) => {
       scalesAdapter.upsertMany(state.scales, action.payload);
+    });
+    builder.addCase(fetchScales.rejected, () => {
+      message.error('Unable to retrieve scale data from the server');
     });
   },
 });
