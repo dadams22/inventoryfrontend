@@ -31,13 +31,12 @@ function InventoryHome() {
     )
     .map((item) => ({ ...item, key: item.id }));
 
-  const columns: ColumnProps<any>[] = [
+  const columns: ColumnProps<InventoryItem>[] = [
     {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      sorter: (a: InventoryItem, b: InventoryItem) =>
-        a.name.localeCompare(b.name),
+      sorter: (a, b) => a.name.localeCompare(b.name),
       render: (name: string, item: InventoryItem) => (
         <Link to={`/inventory/${item.id}`}>{name}</Link>
       ),
@@ -46,8 +45,7 @@ function InventoryHome() {
       title: 'Date Stocked',
       dataIndex: 'created_at',
       key: 'created_at',
-      sorter: (a: InventoryItem, b: InventoryItem) =>
-        a.created_at.localeCompare(b.created_at),
+      sorter: (a, b) => a.created_at.localeCompare(b.created_at),
       render: (created_at: string) => created_at.slice(0, 10),
     },
     {
@@ -62,7 +60,7 @@ function InventoryHome() {
       dataIndex: 'last_measurement',
       key: 'last_measurement',
       align: 'right',
-      sorter: (a: InventoryItem, b: InventoryItem) => {
+      sorter: (a, b) => {
         const weightA = _.get(a, 'last_measurement.value', -1);
         const weightB = _.get(b, 'last_measurement.value', -1);
         return weightA - weightB;
