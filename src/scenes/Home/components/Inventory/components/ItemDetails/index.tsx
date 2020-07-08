@@ -31,7 +31,11 @@ const ItemDetails = () => {
   }
 
   const actions = [
-    <Button danger onClick={() => renderDeleteItemConfirm(item, history)}>
+    <Button
+      key='delete'
+      danger
+      onClick={() => renderDeleteItemConfirm(item, history)}
+    >
       Delete Item
     </Button>,
   ];
