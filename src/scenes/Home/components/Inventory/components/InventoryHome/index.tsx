@@ -125,7 +125,12 @@ function InventoryHome() {
       </Row>
       <Row justify='center' style={spacedRowStyle}>
         <Col span={18}>
-          <Table dataSource={dataSource} columns={columns} loading={fetching} />
+          <Table
+            dataSource={dataSource}
+            columns={columns}
+            loading={fetching}
+            size='middle'
+          />
         </Col>
       </Row>
       <AddItemModal />
