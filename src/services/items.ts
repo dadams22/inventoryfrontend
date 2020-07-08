@@ -78,6 +78,7 @@ export const itemsSlice = createSlice({
     });
     builder.addCase(fetchItems.rejected, (state) => {
       state.fetching = false;
+      message.error('Unable to retrieve item data from the server');
     });
     builder.addCase(createItem.fulfilled, (state, action) => {
       const newItem = action.payload as InventoryItem;
