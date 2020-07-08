@@ -38,7 +38,7 @@ function Scales() {
   return (
     <>
       <Row>
-        <Col span={4} offset={3}>
+        <Col span={6} offset={3}>
           <SearchBar
             searchValue={searchValue}
             onChange={setSearchValue}
