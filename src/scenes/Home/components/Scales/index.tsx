@@ -48,7 +48,7 @@ function Scales() {
       </Row>
       <Row justify='center' style={spacedRowStyle}>
         <Col span={18}>
-          <Table dataSource={dataSource} columns={columns} />
+          <Table dataSource={dataSource} columns={columns} size='middle' />
         </Col>
       </Row>
     </>
