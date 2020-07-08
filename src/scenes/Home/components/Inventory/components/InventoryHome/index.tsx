@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { Button, Col, Row, Table, Tag, Dropdown, Menu, Modal } from 'antd';
+import { Button, Col, Row, Table, Tag, Dropdown, Menu } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
@@ -9,12 +9,12 @@ import SearchBar from '../../../../../../components/SearchBar';
 import AddItemModal from '../AddItemModal';
 import { ApplicationState } from '../../../../../../store';
 import {
-  deleteItem,
   InventoryItem,
   setAddItemModalState,
 } from '../../../../../../services/items';
 import { fetchScales } from '../../../../../../services/scales';
 import { itemsSelectors } from '../../../../../../services/selectors';
+import renderDeleteItemConfirm from '../ConfirmDeleteItemModal';
 
 function InventoryHome() {
   const dispatch = useDispatch();
@@ -30,15 +30,6 @@ function InventoryHome() {
       item.name.toLowerCase().includes(searchValue.toLowerCase()),
     )
     .map((item) => ({ ...item, key: item.id }));
-
-  const renderDeleteItemConfirm = (item: InventoryItem) =>
-    Modal.confirm({
-      title: `Are you sure you want to delete ${item.name}?`,
-      content:
-        'Deleting an item causes all data collected for that item to be permanently deleted',
-      okText: 'Delete',
-      onOk: () => dispatch(deleteItem(item.id)),
-    });
 
   const columns: ColumnProps<any>[] = [
     {
