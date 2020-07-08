@@ -57,7 +57,7 @@ const ItemDetails = () => {
             </Descriptions.Item>
             <Descriptions.Item label='Linked Scales'>
               {item.scales.map((scale) => (
-                <Tag>{scale}</Tag>
+                <Tag key={scale}>{scale}</Tag>
               ))}
             </Descriptions.Item>
           </Descriptions>
