@@ -8,10 +8,12 @@ import {
   Row,
   Statistic,
   Tag,
+  Button,
 } from 'antd';
 import { useSelector } from 'react-redux';
 import { itemsSelectors } from '../../../../../../services/selectors';
 import { ApplicationState } from '../../../../../../store';
+import renderDeleteItemConfirm from '../ConfirmDeleteItemModal';
 
 const ItemDetails = () => {
   let { itemId } = useParams();
@@ -28,6 +30,12 @@ const ItemDetails = () => {
     );
   }
 
+  const actions = [
+    <Button danger onClick={() => renderDeleteItemConfirm(item, history)}>
+      Delete Item
+    </Button>,
+  ];
+
   return (
     <Row justify='center'>
       <Col span={18}>
@@ -36,6 +44,7 @@ const ItemDetails = () => {
           subTitle='Item Details'
           onBack={() => history.push('/inventory')}
           ghost={false}
+          extra={actions}
         >
           <Descriptions>
             {item.description && (
