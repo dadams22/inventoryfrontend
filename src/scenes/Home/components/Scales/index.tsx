@@ -5,6 +5,7 @@ import { ColumnProps } from 'antd/es/table';
 import SearchBar from '../../../../components/SearchBar';
 import { Scale } from '../../../../services/scales';
 import { scalesSelectors } from '../../../../services/selectors';
+import ScalesStatusChart from './components/ScalesStatusChart';
 
 function Scales() {
   const scales = useSelector(scalesSelectors.selectAll);
@@ -28,7 +29,11 @@ function Scales() {
       key: 'item',
       sorter: (a, b) => Number(a.item !== null) - Number(b.item !== null),
       render: (item: number) =>
-        item === null ? <Tag color='green'>Available</Tag> : <Tag>In Use</Tag>,
+        item === null ? (
+          <Tag color='green'>Available</Tag>
+        ) : (
+          <Tag color='blue'>In Use</Tag>
+        ),
     },
   ];
 
@@ -37,7 +42,12 @@ function Scales() {
 
   return (
     <>
-      <Row>
+      <Row gutter={8}>
+        <Col span={12} offset={3}>
+          <ScalesStatusChart />
+        </Col>
+      </Row>
+      <Row style={spacedRowStyle}>
         <Col span={6} offset={3}>
           <SearchBar
             searchValue={searchValue}
