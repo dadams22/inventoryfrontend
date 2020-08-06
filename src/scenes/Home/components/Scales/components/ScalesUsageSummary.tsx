@@ -10,6 +10,8 @@ const ScalesUsageSummary = () => {
   const inUse = scales.filter((scale: Scale) => scale.item !== null).length;
   const usagePct = (inUse / scales.length) * 100;
 
+  const available = scales.length - inUse;
+
   return (
     <div
       style={{
@@ -28,11 +30,13 @@ const ScalesUsageSummary = () => {
             value={usagePct}
             suffix='%'
             precision={1}
+            valueStyle={{ color: '#5B8FF9' }}
           />
           <Statistic
-            title='Scales in Use'
-            value={inUse}
-            suffix={`/${scales.length}`}
+            title='Scales Available'
+            value={available}
+            suffix={`/ ${scales.length}`}
+            valueStyle={{ color: '#5AD8A6' }}
           />
         </Space>
       </div>
