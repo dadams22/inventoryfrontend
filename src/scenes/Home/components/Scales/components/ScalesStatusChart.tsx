@@ -20,7 +20,7 @@ const ScalesStatusChart = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: 'white', height: 'auto' }}>
+    <div style={{ backgroundColor: 'white', height: 'auto', borderRadius: 10 }}>
       {scales && scales.length ? (
         <Donut
           data={data}
