@@ -6,6 +6,7 @@ import SearchBar from '../../../../components/SearchBar';
 import { Scale } from '../../../../services/scales';
 import { scalesSelectors } from '../../../../services/selectors';
 import ScalesStatusChart from './components/ScalesStatusChart';
+import ScalesUsageSummary from './components/ScalesUsageSummary';
 
 function Scales() {
   const scales = useSelector(scalesSelectors.selectAll);
@@ -45,6 +46,9 @@ function Scales() {
       <Row gutter={8}>
         <Col span={12} offset={3}>
           <ScalesStatusChart />
+        </Col>
+        <Col span={6}>
+          <ScalesUsageSummary />
         </Col>
       </Row>
       <Row style={spacedRowStyle}>
