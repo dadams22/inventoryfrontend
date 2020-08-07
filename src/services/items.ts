@@ -9,6 +9,13 @@ import {
 import { message } from 'antd';
 import apiInstance from '../utils/api';
 
+export interface ItemStocking {
+  id: number;
+  created_at: string;
+  scales: number[];
+  last_measurement: number;
+}
+
 export interface InventoryItem {
   id: number;
   name: string;
