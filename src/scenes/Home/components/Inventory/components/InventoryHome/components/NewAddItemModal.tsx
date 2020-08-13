@@ -1,12 +1,20 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Form, Input, Modal } from 'antd';
 
-const renderNewAddItemModal = () => {
-  Modal.confirm({
-    title: 'Add a New Item',
-    content: 'works',
-    okText: 'Create',
-  })
+const NewAddItemModal = () => {
+  return (
+    <Modal title='Add a New Item' okText='Create'>
+      <Form>
+        <Form.Item
+          label='Name'
+          name='name'
+          rules={[{ required: true, message: "Please enter the item's name" }]}
+        >
+          <Input />
+        </Form.Item>
+      </Form>
+    </Modal>
+  );
 };
 
-export default renderNewAddItemModal;
+export default NewAddItemModal;
