@@ -7,7 +7,7 @@ import {
   PageHeader,
   Row,
   Statistic,
-  Tag,
+  // Tag,
   Button,
 } from 'antd';
 import { useSelector } from 'react-redux';
@@ -59,16 +59,16 @@ const ItemDetails = () => {
             <Descriptions.Item label='Date Stocked'>
               {item.created_at}
             </Descriptions.Item>
-            <Descriptions.Item label='Linked Scales'>
-              {item.scales.map((scale) => (
-                <Tag key={scale}>{scale}</Tag>
-              ))}
-            </Descriptions.Item>
+            {/* <Descriptions.Item label='Linked Scales'> */}
+            {/*   {item.scales.map((scale) => ( */}
+            {/*     <Tag key={scale}>{scale}</Tag> */}
+            {/*    ))}  */}
+            {/* </Descriptions.Item> */}
           </Descriptions>
           {item.last_measurement && (
             <Statistic
               title='Current Weight'
-              value={item.last_measurement.value}
+              value={item.last_measurement}
               precision={2}
               suffix='lbs.'
             />
