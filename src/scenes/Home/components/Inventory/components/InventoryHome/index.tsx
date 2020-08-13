@@ -15,6 +15,7 @@ import {
 import { fetchScales } from '../../../../../../services/scales';
 import { itemsSelectors } from '../../../../../../services/selectors';
 import renderDeleteItemConfirm from '../ConfirmDeleteItemModal';
+import renderNewAddItemModal from './components/NewAddItemModal';
 
 function InventoryHome() {
   const dispatch = useDispatch();
@@ -111,11 +112,7 @@ function InventoryHome() {
             type='primary'
             icon={<PlusOutlined />}
             style={{ float: 'right' }}
-            onClick={() => {
-              dispatch(setAddItemModalState(true));
-              // TODO: move this somewhere else, probably to an epic
-              dispatch(fetchScales());
-            }}
+            onClick={renderNewAddItemModal}
           >
             Add a New Item
           </Button>
