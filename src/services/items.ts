@@ -22,8 +22,8 @@ export interface InventoryItem {
   description?: string;
   created_at: string;
   site: number;
-  scales: number[];
   last_measurement?: number | null;
+  stockings: ItemStocking[];
 }
 
 export interface ItemsState {
