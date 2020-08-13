@@ -13,7 +13,7 @@ export interface ItemStocking {
   id: number;
   created_at: string;
   scales: number[];
-  last_measurement: number;
+  last_measurement: number | null;
 }
 
 export interface InventoryItem {
@@ -23,10 +23,7 @@ export interface InventoryItem {
   created_at: string;
   site: number;
   scales: number[];
-  last_measurement?: {
-    value: number;
-    timestamp: string;
-  };
+  last_measurement?: number | null;
 }
 
 export interface ItemsState {
