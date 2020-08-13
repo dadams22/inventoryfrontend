@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { Button, Col, Row, Table, Tag, Dropdown, Menu } from 'antd';
+import {
+  Button,
+  Col,
+  Row,
+  Table,
+  // Tag,
+  Dropdown,
+  Menu,
+} from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
@@ -48,13 +56,13 @@ function InventoryHome() {
       sorter: (a, b) => a.created_at.localeCompare(b.created_at),
       render: (created_at: string) => created_at.slice(0, 10),
     },
-    {
-      title: 'Linked Scales',
-      dataIndex: 'scales',
-      key: 'scales',
-      render: (scales: number[]) =>
-        scales.map((scale) => <Tag key={scale}>{scale}</Tag>),
-    },
+    // {
+    //   title: 'Linked Scales',
+    //   dataIndex: 'scales',
+    //   key: 'scales',
+    //   render: (scales: number[]) =>
+    //     scales.map((scale) => <Tag key={scale}>{scale}</Tag>),
+    // },
     {
       title: 'Weight (lbs.)',
       dataIndex: 'last_measurement',

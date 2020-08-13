@@ -2,22 +2,32 @@ import React from 'react';
 import { Form, Input, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../../../../../../store';
-import { setAddItemModalState } from '../../../../../../../services/items';
+import {
+  createItem,
+  setAddItemModalState,
+} from '../../../../../../../services/items';
 
 const NewAddItemModal = () => {
+  const dispatch = useDispatch();
+
   const visible = useSelector(
     (state: ApplicationState) => state.items.addItemModalState,
   );
-  const dispatch = useDispatch();
+
+  const [form] = Form.useForm();
 
   return (
     <Modal
       title='Add a New Item'
       visible={visible}
       okText='Create'
+      onOk={() => {
+        form.submit();
+        dispatch(setAddItemModalState(false));
+      }}
       onCancel={() => dispatch(setAddItemModalState(false))}
     >
-      <Form>
+      <Form form={form} onFinish={(values) => dispatch(createItem(values))}>
         <Form.Item
           label='Name'
           name='name'
