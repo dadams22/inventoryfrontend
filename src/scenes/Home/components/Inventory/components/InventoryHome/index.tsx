@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import { Button, Col, Row, Table, Tag, Dropdown, Menu } from 'antd';
 import { ColumnProps } from 'antd/es/table';
@@ -8,17 +8,12 @@ import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../../../../../components/SearchBar';
 import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../../../store';
-import {
-  InventoryItem,
-  setAddItemModalState,
-} from '../../../../../../services/items';
-import { fetchScales } from '../../../../../../services/scales';
+import { InventoryItem } from '../../../../../../services/items';
 import { itemsSelectors } from '../../../../../../services/selectors';
 import renderDeleteItemConfirm from '../ConfirmDeleteItemModal';
 import renderNewAddItemModal from './components/NewAddItemModal';
 
 function InventoryHome() {
-  const dispatch = useDispatch();
   const items = useSelector(itemsSelectors.selectAll);
   const fetching = useSelector(
     (state: ApplicationState) => state.items.fetching,
