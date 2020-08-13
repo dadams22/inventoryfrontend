@@ -132,6 +132,9 @@ function InventoryHome() {
             columns={columns}
             loading={fetching}
             size='middle'
+            expandable={{
+              childrenColumnName: 'stockings',
+            }}
           />
         </Col>
       </Row>
