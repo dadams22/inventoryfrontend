@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Select } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { useSelector } from 'react-redux';
-import { scalesSelectors } from '../../../../../../../services/selectors';
+import { scalesSelectors } from '../../../../../../../../../services/selectors';
 
 interface Props {
   form: FormInstance;

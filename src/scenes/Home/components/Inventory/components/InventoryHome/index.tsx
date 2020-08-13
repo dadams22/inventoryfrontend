@@ -6,7 +6,7 @@ import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../../../../../components/SearchBar';
-import AddItemModal from '../AddItemModal';
+import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../../../store';
 import {
   InventoryItem,

@@ -9,8 +9,8 @@ import { FormData } from './types';
 import {
   createItem,
   setAddItemModalState,
-} from '../../../../../../services/items';
-import { ApplicationState } from '../../../../../../store';
+} from '../../../../../../../../services/items';
+import { ApplicationState } from '../../../../../../../../store';
 
 const { Step } = Steps;
 
