@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { Button, Col, Row, Table, Tag, Dropdown, Menu } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import { Link } from 'react-router-dom';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../../../../../components/SearchBar';
-import AddItemModal from './components/AddItemModal';
 import { ApplicationState } from '../../../../../../store';
-import { InventoryItem } from '../../../../../../services/items';
+import {
+  InventoryItem,
+  setAddItemModalState,
+} from '../../../../../../services/items';
 import { itemsSelectors } from '../../../../../../services/selectors';
 import renderDeleteItemConfirm from '../ConfirmDeleteItemModal';
-import renderNewAddItemModal from './components/NewAddItemModal';
+import NewAddItemModal from './components/NewAddItemModal';
 
 function InventoryHome() {
+  const dispatch = useDispatch();
+
   const items = useSelector(itemsSelectors.selectAll);
   const fetching = useSelector(
     (state: ApplicationState) => state.items.fetching,
@@ -107,7 +111,7 @@ function InventoryHome() {
             type='primary'
             icon={<PlusOutlined />}
             style={{ float: 'right' }}
-            onClick={renderNewAddItemModal}
+            onClick={() => dispatch(setAddItemModalState(true))}
           >
             Add a New Item
           </Button>
@@ -123,7 +127,7 @@ function InventoryHome() {
           />
         </Col>
       </Row>
-      <AddItemModal />
+      <NewAddItemModal />
     </>
   );
 }
